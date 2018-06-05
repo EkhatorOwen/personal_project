@@ -6,12 +6,12 @@ const auth0Strategy = new Auth0Strategy(
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
         callbackURL: '/login',
-        scope:'openid email profile'
+        scope:'openid profile'
 
     },
     (accessToken, refreshToken,extraParams, profile,done)=>{
        // console.log(profile);
-        done(null, profile)
+         done(null, profile)
     }
 )
 
@@ -22,7 +22,7 @@ const getUser = (req,res) =>{
 
 const logout = (req,res)=>{
     req.session.destroy(()=>{
-        res.redirect('http://localhost:3000/#/')
+        res.redirect('http://localhost:3000/')
     })
 }
 

@@ -1,0 +1,1 @@
+INSERT INTO public.user (name, full_name, lead, email, phone) VALUES ($1,$2,TRUE,$3,$4);
