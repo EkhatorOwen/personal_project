@@ -1,2 +1,2 @@
-INSERT INTO public.user ( full_name, name, authid, email, lead)
-VALUES ($1,$2,$3,$4,TRUE)
+INSERT INTO public.user ( name, full_name, lead, email,  authid)
+VALUES ($1,$2,TRUE,$3,$4) RETURNING *;

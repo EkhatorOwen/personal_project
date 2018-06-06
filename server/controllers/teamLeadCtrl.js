@@ -1,19 +1,19 @@
+const saveTeamLead = (req, res) => {
+  console.log("user object", req.user);
+  // console.log(req.sessionStore.sessions)
 
+  // console.log(req)
+  // console.log(req.session)
 
-const saveTeamLead =(req,res) =>{
-    console.log(req.user)
-   // console.log(req.sessions)
-    
-   // console.log(req)
-   const { details } = req.body;
+  // console.log(req)
+  const { details } = req.body;
   // console.log(details);
-    // req.app
-    //     .get('db')
-    //     .save_teamlead([req.sessi])
-    //     .then(response=>req.redirect('http://localhost:3000/#/profile'))
-}
+  // req.app
+  //     .get('db')
+  //     .save_teamlead([req.sessi])
+  //     .then(response=>res.redirect('http://localhost:3000/#/profile'))
+};
 
-
-module.exports={
-    saveTeamLead 
-}
+module.exports = {
+  saveTeamLead
+};
