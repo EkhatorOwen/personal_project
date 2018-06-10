@@ -1,38 +1,30 @@
-import React, { Component } from "react";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from "reactstrap";
+import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
+import "./Header.css";
 
 class Header extends Component {
   render() {
     return (
-      <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
+      <Fragment>
+        <div className="header">
+          <Link to="/dashboard" className="logo">
+            Collaborate{" "}
+          </Link>
 
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink href="/">Home</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">
-                Chat
-              </NavLink>
-            </NavItem>
-          </Nav>
-        </Navbar>
-      </div>
+          <div className="header-right">
+            <Link to="/dashboard/addproject">Add Project</Link>
+            <Link to="/dashboard/viewproject">View Projects</Link>
+            <Link to="/dashboard/chat"> Chat</Link>
+            <Link to="/dashboard/profile">Profile</Link>
+            <a href="http://localhost:3001/logout"> Logout </a>
+            <img
+              src="http://via.placeholder.com/50x50"
+              alt="avatar"
+              style={{ borderRadius: "50%" }}
+            />
+          </div>
+        </div>
+      </Fragment>
     );
   }
 }

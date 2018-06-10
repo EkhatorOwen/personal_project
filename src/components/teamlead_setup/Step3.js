@@ -35,9 +35,8 @@ class Step3 extends Component {
       teamName: this.props.SignupReducer.teamName,
       currentProject
     };
-    axios
-      .post("http://localhost:3001/api/teamlead", details)
-      .then(res => console.log(res));
+
+    axios.post("/api/teamlead", details).then(res => console.log(res));
   };
 
   handleredesignChange = () => event => {
@@ -55,6 +54,7 @@ class Step3 extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <h1>Step 3 of 3</h1>

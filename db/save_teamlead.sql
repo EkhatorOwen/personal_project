@@ -1,1 +1,5 @@
-INSERT INTO public.user (name, full_name, lead, email, phone) VALUES ($1,$2,TRUE,$3,$4);
+--INSERT INTO public.user (job_title) VALUES ($1);
+UPDATE public.user SET job_title = $1 WHERE authid = $2;
+
+
+

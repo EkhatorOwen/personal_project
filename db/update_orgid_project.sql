@@ -1,0 +1,1 @@
+UPDATE project set org_id=$1 WHERE name=$2;
