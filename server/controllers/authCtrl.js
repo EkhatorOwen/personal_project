@@ -1,22 +1,42 @@
+const getUser = (req, res) => {
+  const { user } = req;
+  const { userdetails } = req.session;
+  // console.log("req.user is ", user);
+  req.app
+    .get("db")
+    .getUserByAuthid([user.id])
+    .then(response => {
+      req.app
+        .get("db")
+        .get_orgid_org_user([response[0].id])
+        .then(resp => {
+          //console.log(resp);
+          req.app
+            .get("db")
+            .get_orgname_teamname([resp[0].org_id])
+            .then(re => {
+              let obj = {
+                name: response[0].full_name,
+                jobTitle: response[0].job_title,
+                email: response[0].email,
+                orgName: re[0].name,
+                teamName: re[0].team_name,
+                img: response[0].img_url
+              };
+              // console.log("object ", obj);
+              res.status(200).json(obj);
+            });
+        });
+    });
+};
 
+const logout = (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("http://localhost:3000/");
+  });
+};
 
-
-
-const getUser = (req,res) =>{
-    if(req.user)res.status(200).json(req.user)
-    else res.status(403).json({message: 'Not logged In'})
-}
-
-const logout = (req,res)=>{
-    req.session.destroy(()=>{
-        res.redirect('http://localhost:3000/')
-    })
-}
-
-
-module.exports ={
-    
-    logout,
-    getUser
-
-}
+module.exports = {
+  logout,
+  getUser
+};

@@ -1,7 +1,7 @@
 let orgid, user_id;
 
 const saveTeamLead = (req, res) => {
-  console.log(req.session.user);
+  console.log(req.body.jobTitle);
   req.app
     .get("db")
     .save_teamlead([req.body.jobTitle, req.user.authid])
@@ -15,12 +15,11 @@ const saveTeamLead = (req, res) => {
             .get_orgid([req.body.companyName])
             .then(response => {
               orgid = response;
-              console.log("orgid ", orgid);
+
               req.app
                 .get("db")
                 .get_userid([req.user.authid])
                 .then(uid => {
-                  console.log("user id", uid);
                   req.app
                     .get("db")
                     .insert_orgid_org_user([req.session.user.id, orgid[0].id])

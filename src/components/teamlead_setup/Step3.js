@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import _ from "lodash";
 import axios from "axios";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -119,4 +118,7 @@ const mapStateToProps = state => {
   return { ...state };
 };
 
-export default connect(mapStateToProps, null)(Step3);
+export default connect(
+  mapStateToProps,
+  null
+)(Step3);

@@ -43,9 +43,10 @@ class Step1 extends Component {
 }
 
 const mapStateToProps = state => {
-  return { ...state };
+  return { SignupReducer: state.SignupReducer };
 };
 
-export default connect(mapStateToProps, { updateCompanyName, updateJobTile })(
-  Step1
-);
+export default connect(
+  mapStateToProps,
+  { updateCompanyName, updateJobTile }
+)(Step1);

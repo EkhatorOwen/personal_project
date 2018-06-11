@@ -61,37 +61,29 @@ passport.use(
   )
 );
 
-app.get(
-  "/login",
-  passport.authenticate("auth0"),
-
-  function(req, res) {
-    const { user } = req;
-    const db = app.get("db");
-    db
-      .getUserByAuthid(user.id)
-      .then(response => {
-        if (!response[0]) {
-          db
-            .addUserByAuthid([
-              user.name.givenName,
-              user.displayName,
-              user.emails[0].value,
-              user.id
-            ])
-            .then(response => {
-              //console.log(response[0]);
-              req.session.user = response[0];
-              res.redirect("http://localhost:3000/#/setup/step1");
-            })
-            .catch(console.log);
-        } else {
-          res.redirect("http://localhost:3000/#/dashboard/viewproject");
-        }
-      })
-      .catch(console.log);
-  }
-);
+app.get("/login", passport.authenticate("auth0"), function(req, res) {
+  const { user } = req;
+  const db = app.get("db");
+  db.getUserByAuthid(user.id).then(resp => {
+    if (!resp[0]) {
+      db.addUserByAuthid([
+        user.name.givenName,
+        user.displayName,
+        user.emails[0].value,
+        user.id,
+        user.picture
+      ])
+        .then(response => {
+          //console.log(response[0]);
+          req.session.user = response[0];
+          res.redirect("http://localhost:3000/#/setup/step1");
+        })
+        .catch(console.log);
+    } else {
+      res.redirect("http://localhost:3000/#/dashboard/viewproject");
+    }
+  });
+});
 
 app.get("api/projects", getProjects);
 

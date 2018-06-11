@@ -1,28 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getUserDetails } from "../../ducks/teamLead/ViewProfileReducer";
 import "./profile.css";
 
-export default class Profile extends Component {
-  constructor() {
-    super();
-    this.state = {
-      name: "",
-      jobTitle: "",
-      email: "",
-      pic: "",
-      orgname: ""
-    };
-  }
-  componentDidMount() {
-    axios.get("/api/profile").then(response => {
-      this.setState({
-        name: response.data.displayName,
-        jobTitle: "",
-        email: response.data.emails[0],
-        pic: response.data.picture
-      });
-    });
-  }
+class Profile extends Component {
   render() {
     return (
       <div className="profile-page">
@@ -30,7 +13,7 @@ export default class Profile extends Component {
           <img
             width="150"
             height="150"
-            src="http://via.placeholder.com/150x150"
+            src={this.props.ViewProfile.img}
             alt="avatar"
             style={{ borderRadius: "50%" }}
           />
@@ -39,31 +22,49 @@ export default class Profile extends Component {
               {" "}
               <strong>Name: </strong>
             </p>
-            <p>Owen Ekhator</p>
+            <p>{this.props.ViewProfile.name}</p>
           </label>
 
           <label className="profile-label">
             <p>
               <strong>Job Title: </strong>
             </p>
-            <p>Software Test Analyst</p>
+            <p>{this.props.ViewProfile.jobtitle}</p>
           </label>
           <label className="profile-label">
             <p>
               {" "}
               <strong> Email: </strong>{" "}
             </p>
-            <p>owenekhator@rocketmail.com</p>
+            <p>{this.props.ViewProfile.Email}</p>
+          </label>
+          <label className="profile-label">
+            <p>
+              <strong>Team Name:</strong>{" "}
+            </p>
+            <p>{this.props.ViewProfile.teamname}</p>
           </label>
           <label className="profile-label">
             <p>
               <strong>Organisation Name:</strong>{" "}
             </p>
-            <p>Dev Mountain</p>
+            <p>{this.props.ViewProfile.orgName}</p>
           </label>
-          <button>Update</button>
+          <Link to="/dashboard/editprofile">
+            {" "}
+            <button>Edit</button>
+          </Link>
         </div>
       </div>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    ViewProfile: state.ViewProfile
+  };
+};
+export default connect(
+  mapStateToProps,
+  null
+)(Profile);

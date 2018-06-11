@@ -1,9 +1,16 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getUserDetails } from "../../ducks/teamLead/ViewProfileReducer";
 import "./Header.css";
 
 class Header extends Component {
+  componentDidMount() {
+    this.props.getUserDetails();
+  }
+
   render() {
+    console.log(this.props);
     return (
       <Fragment>
         <div className="header">
@@ -18,7 +25,9 @@ class Header extends Component {
             <Link to="/dashboard/profile">Profile</Link>
             <a href="http://localhost:3001/logout"> Logout </a>
             <img
-              src="http://via.placeholder.com/50x50"
+              width="50"
+              height="50"
+              src={this.props.ViewProfile.img}
               alt="avatar"
               style={{ borderRadius: "50%" }}
             />
@@ -28,5 +37,12 @@ class Header extends Component {
     );
   }
 }
-
-export default Header;
+const mapStateToProps = state => {
+  return {
+    ViewProfile: state.ViewProfile
+  };
+};
+export default connect(
+  mapStateToProps,
+  { getUserDetails }
+)(Header);
