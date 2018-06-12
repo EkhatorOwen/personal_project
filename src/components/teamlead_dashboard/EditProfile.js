@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
+import ImageUploader from "react-images-upload";
+import firebase from "firebase";
+import FileUploader from "react-firebase-file-uploader";
+
 import {
   getName,
   getJobtitle,
@@ -12,35 +16,33 @@ import {
 import "./EditProfile.css";
 
 class EditProfile extends Component {
-  uploadWidget = () => {
-    window.cloudinary.openUploadWidget(
-      { cloud_name: "dvwws6e4w", upload_preset: "wqxxoirx", tags: ["xmas"] },
-      function(error, result) {
-        console.log(result);
-        // res = result[0].url;
-        //this.props.getEmail(result[0].url);
-        // console.log(result[0].url);
-        console.log(window);
-        if (result[0].url != undefined) {
-          axios.post("/api/updatePicture", { result }).then(response => {
-            console.log(response);
-          });
-        }
-      }
-    );
-    // console.log(res);
-    // this.props.getEmail(res);
-  };
+  constructor() {
+    super();
+    this.state = {
+      pictures: []
+    };
+  }
 
   saveChange = () => {
     let obj = {
       name: this.props.ViewProfile.name,
       jobTitle: this.props.ViewProfile.jobtitle,
-      teamName: this.props.ViewProfile.teamname
+      teamName: this.props.ViewProfile.teamname,
+      im
     };
     axios.post("/api/updateProfile", obj).then(response => {
       console.log(response);
     });
+  };
+
+  handleUploadSuccess = filename => {
+    this.setState({ avatar: filename, progress: 100, isUploading: false });
+    firebase
+      .storage()
+      .ref("images")
+      .child(filename)
+      .getDownloadURL()
+      .then(url => this.props.getImg(url));
   };
 
   render() {
@@ -72,12 +74,24 @@ class EditProfile extends Component {
           />
         </div>
 
-        <button className="input-button" onClick={this.uploadWidget}>
-          Change Profile Picture
-        </button>
-        <button className="input-button" onClick={this.saveChange}>
-          Save Changes
-        </button>
+        <div className="input-group">
+          <p>
+            Profile picture:
+            <FileUploader
+              accept="image/*"
+              name="avatar"
+              randomizeFilename
+              storageRef={firebase.storage().ref("images")}
+              onUploadSuccess={this.handleUploadSuccess}
+            />
+          </p>
+        </div>
+
+        <div className="input-group">
+          <button className="input-button" onClick={this.saveChange}>
+            Save Changes
+          </button>
+        </div>
       </div>
     );
   }

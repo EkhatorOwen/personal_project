@@ -7,34 +7,34 @@ const saveTeamLead = (req, res) => {
     .save_teamlead([req.body.jobTitle, req.user.authid])
     .then(response =>
       req.app
+      .get("db")
+      .insert_orgname_teamname([req.body.companyName, req.body.teamName])
+      .then(response =>
+        req.app
         .get("db")
-        .insert_orgname_teamname([req.body.companyName, req.body.teamName])
-        .then(response =>
+        .get_orgid([req.body.companyName])
+        .then(response => {
+          orgid = response;
+
           req.app
             .get("db")
-            .get_orgid([req.body.companyName])
-            .then(response => {
-              orgid = response;
-
+            .get_userid([req.user.authid])
+            .then(uid => {
               req.app
                 .get("db")
-                .get_userid([req.user.authid])
-                .then(uid => {
-                  req.app
-                    .get("db")
-                    .insert_orgid_org_user([req.session.user.id, orgid[0].id])
-                    .then(response =>
-                      res.redirect(
-                        "http://localhost:3000/#/dashboard/viewproject"
-                      )
-                    )
-                    .catch(err => console.log(err));
-                })
+                .insert_orgid_org_user([req.session.user.id, orgid[0].id])
+                .then(response =>
+                  res.redirect(
+                    "http://localhost:3000/#/dashboard/viewproject"
+                  )
+                )
                 .catch(err => console.log(err));
             })
-            .catch(err => console.log(err))
-        )
+            .catch(err => console.log(err));
+        })
         .catch(err => console.log(err))
+      )
+      .catch(err => console.log(err))
     )
     .catch(err => console.log(err));
 };
@@ -47,9 +47,13 @@ const getProjects = (req, res) => {
 };
 
 const updateProfile = (req, res) => {
-  const { body } = req;
+  const {
+    body
+  } = req;
   // console.log(req.session.user);
-  const { id } = req.session.user;
+  const {
+    id
+  } = req.session.user;
   req.app
     .get("db")
     .update_user([body.name, body.jobTitle, req.user.id])
@@ -68,8 +72,12 @@ const updateProfile = (req, res) => {
 
 const updatePicture = (req, res) => {
   // console.log(req.body);
-  const { result } = req.body;
+  const {
+    result
+  } = req.body;
   console.log(result[0].url);
+  let data = result[0].url
+  res.status(200).json(data)
 };
 
 module.exports = {
