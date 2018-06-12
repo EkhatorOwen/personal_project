@@ -20,7 +20,7 @@ class Profile extends Component {
           <label className="profile-label">
             <p>
               {" "}
-              <strong>Name: </strong>
+              <strong>Display Name: </strong>
             </p>
             <p>{this.props.ViewProfile.name}</p>
           </label>

@@ -28,3 +28,8 @@ button :hover {
   cursor: pointer;
   text-decoration: none;
 }
+
+.input-button {
+  margin-top: 10px;
+  margin-left: 10px;
+}

@@ -16,7 +16,7 @@ const getUser = (req, res) => {
             .get_orgname_teamname([resp[0].org_id])
             .then(re => {
               let obj = {
-                name: response[0].full_name,
+                name: response[0].name,
                 jobTitle: response[0].job_title,
                 email: response[0].email,
                 orgName: re[0].name,

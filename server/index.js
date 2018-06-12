@@ -9,7 +9,12 @@ const massive = require("massive");
 const Auth0Strategy = require("passport-auth0");
 
 const { logout, getUser } = require("./controllers/authCtrl");
-const { saveTeamLead, getProjects } = require("./controllers/teamLeadCtrl");
+const {
+  saveTeamLead,
+  getProjects,
+  updateProfile,
+  updatePicture
+} = require("./controllers/teamLeadCtrl");
 const port = 3001;
 
 const app = express();
@@ -80,6 +85,7 @@ app.get("/login", passport.authenticate("auth0"), function(req, res) {
         })
         .catch(console.log);
     } else {
+      req.session.user = resp[0];
       res.redirect("http://localhost:3000/#/dashboard/viewproject");
     }
   });
@@ -97,6 +103,10 @@ app.get("/logout", logout);
 app.get("/api/profile", getUser);
 
 app.post("/api/teamlead", saveTeamLead);
+
+app.post("/api/updateProfile", updateProfile);
+
+app.post("/api/updatePicture", updatePicture);
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);

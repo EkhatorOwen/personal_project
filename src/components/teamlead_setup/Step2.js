@@ -9,9 +9,9 @@ import { updateTeamName } from "../../ducks/teamLead/SignupReducer";
 class Step2 extends Component {
   submit = () => {
     let details = {
-      companyName: this.props.SignupReducer.companyName,
-      jobTitle: this.props.SignupReducer.jobTitle,
-      teamName: this.props.SignupReducer.teamName
+      companyName: this.props.Signup.companyName,
+      jobTitle: this.props.Signup.jobTitle,
+      teamName: this.props.Signup.teamName
     };
     axios.post("/api/teamlead", details).then(res => {
       console.log(res);
@@ -20,7 +20,6 @@ class Step2 extends Component {
   };
 
   render() {
-    // console.log(this.props);
     return (
       <div>
         <h1>Step 2 of 2</h1>

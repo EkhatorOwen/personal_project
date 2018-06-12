@@ -46,7 +46,35 @@ const getProjects = (req, res) => {
     .then(response => res.status(200).json(response));
 };
 
+const updateProfile = (req, res) => {
+  const { body } = req;
+  // console.log(req.session.user);
+  const { id } = req.session.user;
+  req.app
+    .get("db")
+    .update_user([body.name, body.jobTitle, req.user.id])
+    .then(re => {
+      req.app
+        .get("db")
+        .get_orgid_org_user([id])
+        .then(response => {
+          req.app
+            .get("db")
+            .update_teamname([body.teamName, response[0]])
+            .then(respon => res.status(200).json(respon));
+        });
+    });
+};
+
+const updatePicture = (req, res) => {
+  // console.log(req.body);
+  const { result } = req.body;
+  console.log(result[0].url);
+};
+
 module.exports = {
   saveTeamLead,
-  getProjects
+  getProjects,
+  updateProfile,
+  updatePicture
 };
