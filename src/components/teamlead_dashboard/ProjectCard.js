@@ -1,14 +1,13 @@
 import React from "react";
 
-const ProjectCard = () => {
+const ProjectCard = props => {
   return (
     <div className="project-card">
       <div className="view-name">
-        <p>Name: </p>
+        <p>Name: {props.element.name}</p>
       </div>
       <div className="view-description">
-        <p>Description:</p>
-        <p>Name:</p>
+        <p>Description: {props.element.description}</p>
       </div>
     </div>
   );

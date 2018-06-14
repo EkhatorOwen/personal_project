@@ -25,6 +25,9 @@ massive(process.env.CONNECTION_STRING)
 
 app.use(json());
 app.use(cors());
+// app.use((req,res,next)=>{
+//   if(!req.session.user)
+// })
 
 app.use(
   session({

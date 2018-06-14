@@ -6,6 +6,11 @@ import {
 } from "../../ducks/teamLead/AddProjectReducer";
 import axios from "axios";
 
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
+
 class AddProject extends Component {
   save = () => {
     let details = {
@@ -14,7 +19,9 @@ class AddProject extends Component {
     };
 
     //console.log(details);
-    axios.post("/api/saveProject", { details });
+    axios.post("/api/saveProject", { details }).then(response => {
+      NotificationManager.success("Success", "Project Added Successfully");
+    });
   };
   render() {
     return (
@@ -42,6 +49,7 @@ class AddProject extends Component {
             Save Project
           </button>
         </div>
+        <NotificationContainer />
       </div>
     );
   }
