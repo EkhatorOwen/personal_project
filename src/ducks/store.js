@@ -15,7 +15,7 @@ const combinedReducers = combineReducers({
   AddProject: AddProjectReducer
 });
 
-const middlewares = composeEnhancers(applyMiddleware(promiseMiddleware()));
+//const middlewares = composeEnhancers(applyMiddleware(promiseMiddleware()));
 
 const store = createStore(combinedReducers, enhancer);
 

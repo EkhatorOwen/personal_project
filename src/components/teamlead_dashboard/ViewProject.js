@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import ProjectCard from "./ProjectCard";
-import "react-notifications/lib/notifications.css";
 
 export default class ViewProject extends Component {
   constructor(props) {
@@ -24,21 +23,21 @@ export default class ViewProject extends Component {
     let proj = this.state.projects;
     console.log(proj);
     let result;
-    if (proj.length != 0) {
+    if (proj.length !== 0) {
       result = proj.map((element, index) => {
-        return (<ProjectCard key={index} element={element}/>) 
+        return <ProjectCard key={index} element={element} />;
       });
     }
 
     return (
       <div className="view-project">
-        {proj.length == 0 ? (
+        {proj.length === 0 ? (
           <p>
             You have no projects, click the <b>Add Project </b>
             menu on the header to add a new project
           </p>
         ) : (
-           result 
+          result
         )}
       </div>
     );
