@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import ImageUploader from "react-images-upload";
-import firebase from "firebase";
+import firebase from "./Firebase";
+//import firebase from "firebase";
 import FileUploader from "react-firebase-file-uploader";
 
 import {
