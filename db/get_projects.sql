@@ -1,1 +1,3 @@
-select name,description from project where org_id=$1;
+select name, description, created_at
+from project
+where org_id=$1;

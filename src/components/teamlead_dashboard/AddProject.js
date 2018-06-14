@@ -10,12 +10,15 @@ import {
   NotificationContainer,
   NotificationManager
 } from "react-notifications";
+import moment from "moment";
 
 class AddProject extends Component {
   save = () => {
+    const stateDate = moment().format("MM/DD/YY, hh:mm");
     let details = {
       name: this.props.AddProject.projectName,
-      desc: this.props.AddProject.description
+      desc: this.props.AddProject.description,
+      created_at: stateDate
     };
 
     //console.log(details);
