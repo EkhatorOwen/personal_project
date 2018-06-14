@@ -1,4 +1,4 @@
 insert into project
-    (name,desc)
+    (name,description,org_id)
 VALUES
-    ($1, $2)
+    ($1, $2 , $3); 

@@ -1,37 +1,35 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
-import {
-  Card,
-  Button,
-  CardImg,
-  CardTitle,
-  CardText,
-  CardColumns,
-  CardSubtitle,
-  CardBody,
-  Container,
-  Row,
-  Col
-} from "reactstrap";
 
 export default class ViewProject extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      projects: []
+    };
+  }
+
+  componentDidMount() {
+    axios.get("/api/projects").then(project => {
+      console.log(project);
+      this.setState({
+        projects: project
+      });
+    });
+  }
+
   render() {
+    let proj = this.state.projects;
+
     return (
-      <Fragment>
-        <Row>
-          <Col sm="4">
-            <Card
-              body
-              inverse
-              style={{ backgroundColor: "#333", borderColor: "#333" }}
-            >
-              <CardTitle>Project Title</CardTitle>
-              <CardText>Project description</CardText>
-              <Button>View Project Details</Button>
-            </Card>
-          </Col>
-        </Row>
-      </Fragment>
+      <div className="view-project">
+        {proj.length == 0 && (
+          <p>
+            You have no projects, click the <b>Add Project </b>
+            link on the header to add a new project
+          </p>
+        )}
+      </div>
     );
   }
 }

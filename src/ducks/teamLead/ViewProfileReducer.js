@@ -117,6 +117,12 @@ export default function viewProfileReducer(state = initialState, action) {
         teamname: action.payload
       };
 
+    case "GET_IMG":
+      return {
+        ...state,
+        img: action.payload
+      };
+
     default:
       return state;
   }

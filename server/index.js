@@ -13,7 +13,7 @@ const {
   saveTeamLead,
   getProjects,
   updateProfile,
-  updatePicture
+  saveProject
 } = require("./controllers/teamLeadCtrl");
 const port = 3001;
 
@@ -91,7 +91,7 @@ app.get("/login", passport.authenticate("auth0"), function(req, res) {
   });
 });
 
-app.get("api/projects", getProjects);
+app.get("/api/projects", getProjects);
 
 //app.get("/api/me", getUser);
 
@@ -104,9 +104,9 @@ app.get("/api/profile", getUser);
 
 app.post("/api/teamlead", saveTeamLead);
 
-app.post("/api/updateProfile", updateProfile);
+app.post("/api/saveProject", saveProject);
 
-app.post("/api/updatePicture", updatePicture);
+app.post("/api/updateProfile", updateProfile);
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);

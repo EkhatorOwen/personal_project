@@ -28,7 +28,7 @@ class EditProfile extends Component {
       name: this.props.ViewProfile.name,
       jobTitle: this.props.ViewProfile.jobtitle,
       teamName: this.props.ViewProfile.teamname,
-      im
+      img: this.props.ViewProfile.img
     };
     axios.post("/api/updateProfile", obj).then(response => {
       console.log(response);
