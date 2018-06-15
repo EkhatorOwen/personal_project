@@ -7,6 +7,8 @@ import ViewProject from "./ViewProject";
 import Profile from "./Profile";
 import AddProject from "./AddProject";
 import EditProfile from "./EditProfile";
+import Project from './Project'
+
 
 export default class Dashboard extends Component {
   // componentDidMount() {
@@ -23,6 +25,7 @@ export default class Dashboard extends Component {
           <Route component={ViewProject} exact path="/dashboard/viewproject" />
           <Route component={Profile} path="/dashboard/profile" />
           <Route component={EditProfile} path="/dashboard/editprofile" />
+          <Route  component={Project} path="/dashboard/project/:id"/>
         </Switch>
       </Fragment>
     );

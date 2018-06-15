@@ -1,0 +1,96 @@
+.content {
+    height: 90vh;
+    width: 100vw;
+}
+
+.main-content {
+    border: 1px solid red;
+    height: 100%;
+    margin: auto 7%;
+}
+
+.content-title {
+    text-align: center;
+    border-radius: 50%;
+    margin-top: 1%
+}
+
+.title-img img {
+    border-radius: 50%;
+    margin: 4px;
+}
+
+.title-menus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-menus button {
+    display: inline-block;
+    padding: 0.3em 1.2em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    color: #FFFFFF;
+    background-color: #4eb5f1;
+    text-align: center;
+    transition: all 0.2s;
+    text-decoration: none;
+    cursor: pointer;
+    
+}
+
+button3:hover {
+    background-color: #4095c6;
+}
+
+.content-body{
+    height: 81% ;
+    border: 1px solid green; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.content-grid{
+    display: flex;
+}
+
+.content-card{
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    width: 200px;
+    border: 1px solid green;
+    margin: 30px;
+
+}
+.card-title{
+    text-align: center;
+    padding: 10px;
+}
+.card-title p{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.card-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+
+@media all and (max-width:30em) {
+    a.button3 {
+        display: block;
+        margin: 0.2em auto;
+    }
+}

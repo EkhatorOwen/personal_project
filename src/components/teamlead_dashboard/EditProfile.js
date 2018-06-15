@@ -16,6 +16,8 @@ import {
 } from "../../ducks/teamLead/ViewProfileReducer";
 import "./EditProfile.css";
 
+import swal from 'sweetalert2';
+
 class EditProfile extends Component {
   constructor() {
     super();
@@ -33,6 +35,17 @@ class EditProfile extends Component {
     };
     axios.post("/api/updateProfile", obj).then(response => {
       console.log(response);
+     // NotificationManager.success("Success", "Profile Saved");
+       const toast = swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
+    });
+    toast({
+      type: 'success',
+      title: 'Profile Saved'
+    })
     });
   };
 
@@ -93,6 +106,7 @@ class EditProfile extends Component {
             Save Changes
           </button>
         </div>
+        
       </div>
     );
   }

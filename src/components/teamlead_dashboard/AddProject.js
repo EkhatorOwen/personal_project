@@ -5,11 +5,9 @@ import {
   updateProjectName
 } from "../../ducks/teamLead/AddProjectReducer";
 import axios from "axios";
+import swal from 'sweetalert2';
 
-import {
-  NotificationContainer,
-  NotificationManager
-} from "react-notifications";
+
 import moment from "moment";
 
 class AddProject extends Component {
@@ -23,8 +21,18 @@ class AddProject extends Component {
 
     //console.log(details);
     axios.post("/api/saveProject", { details }).then(response => {
-      NotificationManager.success("Success", "Project Added Successfully");
+     // NotificationManager.success("Success", "Project Added Successfully");
+    const toast = swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
     });
+    toast({
+      type: 'success',
+      title: 'Project added successfully'
+    })
+    })
   };
   render() {
     return (
@@ -52,7 +60,7 @@ class AddProject extends Component {
             Save Project
           </button>
         </div>
-        <NotificationContainer />
+      
       </div>
     );
   }

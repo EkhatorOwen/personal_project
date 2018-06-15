@@ -1,0 +1,17 @@
+.view-project{
+    display: flex;
+    flex-direction: column;
+    width: 50vh;
+    align-items: center;
+}
+
+.project-card{
+    
+    height: 250px;
+    background-color: #dedede;
+    margin: 20px 0;
+    position: relative;
+    padding: 5px;
+    text-align: center;
+}
+
