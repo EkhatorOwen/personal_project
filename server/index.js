@@ -13,8 +13,10 @@ const {
   saveTeamLead,
   getProjects,
   updateProfile,
-  saveProject
+  saveProject,
+
 } = require("./controllers/teamLeadCtrl");
+const { addPeople } = require('./controllers/peopleCtrl')
 const port = 3001;
 
 const app = express();
@@ -110,6 +112,8 @@ app.post("/api/teamlead", saveTeamLead);
 app.post("/api/saveProject", saveProject);
 
 app.post("/api/updateProfile", updateProfile);
+
+app.post('/api/addPeople', addPeople)
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
