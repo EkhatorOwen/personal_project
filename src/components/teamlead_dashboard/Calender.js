@@ -12,19 +12,47 @@ export default class Calendar extends Component {
         super();
         this.state={
             events: [],
-            addEvent: false
+            addEvent: false,
+            startDate: '',
+            endDate: '',
+            title: ''
         }
     }
 
     componentDidMount(){
-        // const CALENDAR_ID = 'qlti16i9bd6f770k7ddqbnqb04@group.calendar.google.com'
-        // const API_KEY = 'AIzaSyCwxvF1cnObuETDts-TPLDXBxZbNwkOjmY' 
-        // axios.get(`https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`)
-        //      .then(response=> console.log(response.data.items))
+        const CALENDAR_ID = 'qlti16i9bd6f770k7ddqbnqb04@group.calendar.google.com'
+        const API_KEY = 'AIzaSyCwxvF1cnObuETDts-TPLDXBxZbNwkOjmY' 
+        axios.get(`https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`)
+             .then(response=> {
+                
+                if(response.data.items){
+                 let event =   response.data.items.map(element=>{
+                     
+                        return {
+                            title: element.summary,
+                            start: moment(element.start.date).toDate(),
+                            end: moment(element.end.date).toDate(), 
+                        }
+                    })
+                   
+                    let arr = this.state.events.slice()
+                    arr.push(...event)
+                    this.setState({events: arr})
+                } 
+               })
+
     }
 
-    addEvent= ()=>{
-
+    addEvent= (e)=>{
+        e.preventDefault()    
+        let date ={
+                title: this.state.title,
+                start: moment(this.state.startDate).toDate(),
+                end: moment(this.state.endDate).toDate(),
+        }
+        let events = this.state.events.slice()
+            events.push(date)
+            this.setState({events: events})
    }
 
    showFields=()=>{
@@ -35,44 +63,30 @@ export default class Calendar extends Component {
        )
    }
 
+   onChange=(e)=>{
+    this.setState({
+        [e.target.name]: e.target.value
+    })
+   }
+
   render() {
   
-      let events = [
-          {
-        id: 0,
-        title: 'All Day Event very long title',
-        allDay: true,
-        start: moment('2018-6-16'),
-        end: moment('2018-6-16'),
-    },
-    {
-        id: 1,
-        title: 'All Day Event v title',
-        allDay: true,
-        start: moment('2018-7-16'),
-        end: moment('2018-7-19'),
-        desc: 'Pre-meeting meeting, to prepare for the meeting',
-    },
-
-]
     return (
       <div>
         <BigCalendar
-       
         style={{height: '420px',
                 margin: '40px'
                              }}
-        events={events}
-      
+        events={this.state.events}  
         />
         { this.state.addEvent &&
         <form onSubmit={this.addEvent}>
         <label>Title:</label>
-        <input/>
-        <label>start date YYYY-MM-DD:</label>
-        <input/>
-        <label>End Date YYYY-MM-DD</label>
-        <input/>
+        <input value={this.state.title} name="title" onChange={this.onChange}/>
+        <label>start date </label>
+        <input value={this.state.startDate} type="date" name="startDate" onChange={this.onChange}/>
+        <label>End Date</label>
+        <input value={this.state.endDate} type="date" name="endDate" onChange={this.onChange}/>
         <Button
         bgColor="blue"
         label="Add"
