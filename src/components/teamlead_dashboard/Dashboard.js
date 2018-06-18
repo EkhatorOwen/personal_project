@@ -8,6 +8,8 @@ import Profile from "./Profile";
 import AddProject from "./AddProject";
 import EditProfile from "./EditProfile";
 import Project from './Project'
+import ManagePeople from './ManagePeople'
+import Calender from './Calender'
 
 
 export default class Dashboard extends Component {
@@ -25,8 +27,10 @@ export default class Dashboard extends Component {
           <Route component={ViewProject} exact path="/dashboard/viewproject" />
           <Route component={Profile} path="/dashboard/profile" />
           <Route component={EditProfile} path="/dashboard/editprofile" />
-          <Route  component={Project} path="/dashboard/project/:id"/>
-        </Switch>
+          <Route  component={Project} exact path="/dashboard/project/:id"/>
+          <Route component={ManagePeople} exact path="/dashboard/project/:id/people"/>
+          <Route component={Calender} exact path="/dashboard/project/:id/schedule"/>
+          </Switch>
       </Fragment>
     );
   }

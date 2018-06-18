@@ -10,5 +10,6 @@ export default (
     <Route exact path="/" component={Homepage} />
     <Route path="/setup" component={Setup} />
     <Route path="/dashboard" component={Dashboard} />
+   
   </Switch>
 );
