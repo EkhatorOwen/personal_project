@@ -1,0 +1,83 @@
+.message-board-box{
+    display: flex;
+    flex-direction: column;
+    height: -webkit-fill-available;
+}
+
+.message-board-header{
+    text-align: center;
+    height: 30%;
+}
+
+.message-board-header p{
+    font-family: cursive;
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.message-content{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    border: 1px solid saddlebrown;
+}
+.message-table-avatar img{
+    border-radius: 50%;
+}
+.message-subject{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-left: 7px;
+    margin-bottom: -20px;
+}
+.message-table-avatar{
+    margin: 5px;
+}
+.title{
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.message-box{
+    display: flex;
+    height: -webkit-fill-available;
+    margin: 0 auto;
+    width: 100%;
+}
+.message-content-more{
+
+}
+
+.message-poster{
+    font-weight: 100;
+    font-size: 12px;
+    font-family: monospace;
+}
+
+.message-footer{
+    display: flex;
+    justify-content: space-between;
+}
+.footer-actions{
+    width: 20%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-actions img{
+    cursor: pointer;
+}
+
+.message-desc{
+    text-align: justify;
+    padding: 5px;
+}
+
+.message-date{
+    margin-right: 5px; 
+     cursor: pointer; /*should be able to toogle bw posted time and time elasped ago */
+}
+
