@@ -1,6 +1,6 @@
 const getUser = (req, res) => {
   const { user } = req;
-  const { userdetails } = req.session;
+  const { id } = req.session.user;
   // console.log("req.user is ", user);
   req.app
     .get("db")
@@ -16,6 +16,7 @@ const getUser = (req, res) => {
             .get_orgname_teamname([resp[0].org_id])
             .then(re => {
               let obj = {
+                id: id,
                 name: response[0].name,
                 jobTitle: response[0].job_title,
                 email: response[0].email,
