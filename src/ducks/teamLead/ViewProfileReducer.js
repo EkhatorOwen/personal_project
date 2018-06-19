@@ -1,6 +1,7 @@
 import axios from "axios";
 
 let initialState = {
+  id: 0,
   name: "",
   jobtitle: "",
   Email: "",
@@ -79,6 +80,7 @@ export default function viewProfileReducer(state = initialState, action) {
       const { data } = action.payload;
       return {
         ...state,
+        id: data.id,
         name: data.name,
         jobtitle: data.jobTitle,
         Email: data.email,
