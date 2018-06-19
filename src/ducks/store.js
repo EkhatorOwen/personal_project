@@ -4,6 +4,7 @@ import promiseMiddleware from "redux-promise-middleware";
 import SignupReducer from "./teamLead/SignupReducer";
 import ViewProfileReducer from "./teamLead/ViewProfileReducer.js";
 import AddProjectReducer from "./teamLead/AddProjectReducer";
+import GetProjectsReducer from './teamLead/GetProjectsReducer'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -12,7 +13,8 @@ const enhancer = composeEnhancers(applyMiddleware(promiseMiddleware()));
 const combinedReducers = combineReducers({
   Signup: SignupReducer,
   ViewProfile: ViewProfileReducer,
-  AddProject: AddProjectReducer
+  AddProject: AddProjectReducer,
+  GetProject: GetProjectsReducer
 });
 
 //const middlewares = composeEnhancers(applyMiddleware(promiseMiddleware()));
