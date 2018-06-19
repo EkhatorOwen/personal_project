@@ -1,0 +1,23 @@
+.people-box{
+    display: flex;
+    width: 100%;
+
+}
+
+.view-people-details{
+    display: flex;
+    margin: 10px;
+    width: 90%;
+    justify-content: space-between;
+
+}
+
+.people-img{
+    margin: 10px;
+}
+
+.view-people-details .remove-button{
+    display: flex;
+    /* justify-content: center; */
+    align-items: flex-end;
+}
