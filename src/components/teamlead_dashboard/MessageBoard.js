@@ -1,5 +1,14 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import moment from 'moment'
+
+import Message from './Message'
+
+import FroalaEditorInput from 'react-froala-wysiwyg'
+
+import FroalaEditor from 'react-froala-wysiwyg';
+
+
 import Button from './Button'
 
 import './MessageBoard.css'
@@ -8,16 +17,76 @@ export default class MessageBoard extends Component {
     constructor(){
         super()
         this.state={
-            model : 'Sample text'
+            content : '',
+            isEditing: false,
+            messages: [],
+            title: ''
         }
     }
+
      handleModelChange= (value)=>{
             this.setState({
-                model: value
+                content: value
             })
     }
-///dashboard/project/:id/composemessage for my compose button
+
+    componentDidMount(){
+        axios.get(`/api/getMessages/${this.props.match.params.id}`)
+             .then(response=>{
+                
+                this.setState({messages: response.data})
+             })
+    }
+
+    submit=()=>{
+        const startDate = moment().format("MM/DD/YY, hh:mm");
+        let obj={
+            title: this.state.title,
+            content: this.state.content,
+            projId: this.props.match.params.id,
+            created_at: startDate
+        }
+
+        axios.post('/api/addMessage/',obj)
+             .then(response=>{
+                 this.setState({
+                     isEditing: false,
+                     messages: response.data
+                })
+             }) 
+    }
+
+    handleTitleChange=(value)=>{
+        this.setState({
+            title: value
+        })
+    }
+
+    edit=()=>{
+
+    }
+
+    delete=()=>{
+
+    }
+
+
+    newMessage=()=>{
+        this.setState(preState=>({
+            isEditing: !preState.isEditing
+        }))
+    }
+
   render() {
+        const messages = this.state.messages.map((element,index)=>{
+               return (
+                   <Message
+                   key={index}
+                   element={element}
+                   />
+               )
+        })
+    
     return (
       <div className="message-board-box">
 
@@ -30,43 +99,63 @@ export default class MessageBoard extends Component {
                 <Button
                 bgColor="green"
                 label="New Message"
+                method={this.newMessage}
                 />
+
             </div>
         </div>
 
-        <div className="message-box">
-            <div className="message-content">
-                
-                        <div className="message-table-avatar">
-                            <img src="http://via.placeholder.com/75x75" alt="avatar"/>
-                        </div>
+       { this.state.isEditing && <div className="editor">
+        <div className="editor-helper">
 
-                        <div className="message-content-more">
-                            <div className="message-subject">
-                            <p className="title">this is where the subject will go</p>
-                            <div className="message-date">
-                            <p>5 hours ago</p></div>
-                            </div>
-
-                            <div className="message-desc">
-                            <p>eadable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. </p>
-                            </div>
-                            <div className="message-footer"> 
-                                <div className="message-poster">
-                                <p>Posted by Owen Ekhator</p>
-                                </div>
-                                <div className="footer-actions">
-                                    <div className="message-edit">
-                                    <img src="https://image.flaticon.com/icons/svg/149/149307.svg" height="20px" width="20px" />
-                                    </div>
-                                    <div className="message-delete">
-                                    <img src="https://www.flaticon.com/premium-icon/icons/svg/484/484662.svg" height="20px" width="20px" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                
+        <div className="title-input">
+            <div className="message-title-label">
+            <p>Title:</p>
+            <input onChange={e=>this.handleTitleChange(e.target.value)}/>
             </div>
+        </div>
+
+        <div className="message-editor-helper">
+        <p>Message:</p>
+
+        <FroalaEditor
+        model={this.state.content}
+        tag='textarea'
+        onModelChange={this.handleModelChange}
+        />
+
+        <FroalaEditorInput
+           
+            />
+
+        FroalaEditorInput
+        <div className="message-sumbit-button">
+        <Button
+        bgColor="black"
+        label="Submit"
+        method={this.submit}
+        />
+        </div>
+        </div>
+      
+
+        </div>
+        </div>}
+
+        <div className="message-box">
+
+       { this.state.messages.length===0? 
+        <div className="no-message">
+            <div className="no-message-image">
+            <img src="https://image.flaticon.com/icons/svg/576/576827.svg" height="200px" width="200px"/>
+            </div>
+        <div className="no-message-content">
+         <h4> You have no message, click on the New Message button 
+            to add a message
+        </h4>
+        </div>
+        </div>:messages}
+            
       </div>
 
     </div>
