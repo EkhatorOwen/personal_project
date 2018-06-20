@@ -25,11 +25,23 @@ const addMessage =(req,res)=>{
 }
 
 const deleteMessage =(req,res) =>{
-
+     const { projid, messageid } = req.params;
+    
+    console.log(req.params);
+    req.app
+        .get('db')
+        .delete_message([messageid])
+        .then(response=>{
+            req.app.get('db')
+                    .get_messages_user([projid])
+                    .then(data=> res.status(200).json(data))
+        })
+        .catch(err=>console.log(err))
 }
 
 const updateMessage=(req,res)=>{
-    
+    const { body } = req;
+    console.log(body)
     req.app.get('db')
             .update_message([body.title,body.content,body.userId,body.id])
             .then(response=>{

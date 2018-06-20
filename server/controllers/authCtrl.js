@@ -1,35 +1,29 @@
 const getUser = (req, res) => {
   const { user } = req;
   const { id } = req.session.user;
-  // console.log("req.user is ", user);
+ //console.log("user id is ", user.emails[0].value);
   req.app
     .get("db")
-    .getUserByAuthid([user.id])
+    .getUserByAuthid(user.emails[0].value)
     .then(response => {
-      req.app
-        .get("db")
-        .get_orgid_org_user([response[0].id])
-        .then(resp => {
-          //console.log(resp);
-          req.app
-            .get("db")
-            .get_orgname_teamname([resp[0].org_id])
-            .then(re => {
+        //console.log(response[0].job_title)
+      //  console.log("response from the database is ",response[0])
               let obj = {
                 id: id,
                 name: response[0].name,
                 jobTitle: response[0].job_title,
                 email: response[0].email,
-                orgName: re[0].name,
-                teamName: re[0].team_name,
-                img: response[0].img_url
+                orgName: response[0].org,
+                teamName: response[0].team_name,
+                img: response[0].img_url,
+                isLead: response[0].lead
               };
-              // console.log("object ", obj);
-              res.status(200).json(obj);
-            });
-        });
-    });
-};
+              console.log('user obj is ',obj)
+              res.status(200).json(obj)
+            })
+
+          }
+
 
 const logout = (req, res) => {
   req.session.destroy(() => {
