@@ -50,7 +50,9 @@ class Step2 extends Component {
 }
 
 const mapStateToProps = state => {
-  return { SignupReducer: state.SignupReducer };
+  return { Signup: state.Signup 
+  
+  };
 };
 
 export default connect(

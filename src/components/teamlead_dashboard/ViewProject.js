@@ -10,38 +10,33 @@ import './ViewProject.css'
  
 
   componentDidMount() {
-    // axios.get("/api/projects").then(project => {
-    //   console.log(project.data);
-    //   this.setState({
-    //     projects: project.data
-    //   });
-    // });
+   
     this.props.getProjects();
   }
 
-//   deleteProject =(id)=>{
-//     swal({
-//   title: 'Are you sure?',
-//   text: "You won't be able to revert this!",
-//   type: 'warning',
-//   showCancelButton: true,
-//   confirmButtonColor: '#3085d6',
-//   cancelButtonColor: '#d33',
-//   confirmButtonText: 'Yes, delete it!'
-// }).then((result) => {
-//   if (result.value) {
-//     //axios.delete(`project/delete/${id}`)
-//             // .then(response=>{
-//     swal(
-//       'Deleted!',
-//       'Your file has been deleted.',
-//       'success'
-             
-//             // })
-//     )
-//   }
-// })
-//   }
+  deleteProject =(id)=>{
+    swal({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.value) {
+    axios.delete(`/api/deleteProject/${id}`)
+            .then(response=>{
+    swal(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )  
+    this.props.getProjects()
+            })
+  }
+})
+  }
 
   render() {
     let proj = this.props.GetProject.projects;
@@ -49,18 +44,29 @@ import './ViewProject.css'
     let result;
     if (proj.length !== 0) {
       result = proj.map((element, index) => {
-        return <ProjectCard key={index} element={element} />;
+        return <ProjectCard
+         key={index}
+         element={element}
+         deleteProject={this.deleteProject}
+
+           />;
       });
     }
 
     return (
       <div className="view-project">
         {proj.length === 0 ? (
-          <p>
+          <div className="no-message">
+          <img src="https://image.flaticon.com/icons/svg/80/80565.svg" height="200px" width="200px"/>
+          <div className="no-message-content">
+          <h4>
             You have no projects, click the <b>Add Project </b>
             menu to add a new project
-          </p>
+          </h4>
+          </div>
+          </div>
         ) : (
+          
           result
         )}
     
