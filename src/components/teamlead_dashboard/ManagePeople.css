@@ -1,7 +1,7 @@
 .add-people{
     display:flex;
     flex-direction: column;
-    margin: 10px;
+    margin: 0 10%;
 }
 
 .input-details form{

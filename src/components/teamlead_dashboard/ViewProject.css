@@ -1,7 +1,7 @@
 .view-project{
     display: flex;
-    flex-direction: column;
-    width: 50vh;
+    flex-direction: row;
+    width: 100%;
     align-items: center;
 }
 
@@ -9,7 +9,7 @@
     
     height: 250px;
     background-color: #dedede;
-    margin: 20px 0;
+    margin: 20px;
     position: relative;
     padding: 5px;
     text-align: center;
