@@ -11,7 +11,16 @@ const deleteProject =(req, res)=>{
              })
 }
 
+ const getProjectPictures =(req,res)=>{
+     const { id } = req.params;
+     req.app.get('db')
+            .getProjectPictures([id])
+            .then(respsone=> res.status(200).json(respsone))
+
+ }
+
 
 module.exports={
-    deleteProject
+    deleteProject,
+    getProjectPictures
 }
