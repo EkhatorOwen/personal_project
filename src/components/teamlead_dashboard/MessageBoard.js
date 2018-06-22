@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import moment from 'moment'
 
+import swal from 'sweetalert2';
+
 import Message from './Message'
 
 import FroalaEditorInput from 'react-froala-wysiwyg'
@@ -11,17 +13,23 @@ import FroalaEditor from 'react-froala-wysiwyg';
 
 import Button from './Button'
 
+import 'font-awesome/css/font-awesome.css';
 import './MessageBoard.css'
 
-export default class MessageBoard extends Component {
+ class MessageBoard extends Component {
     constructor(){
         super()
         this.state={
             content : '',
             isEditing: false,
             messages: [],
-            title: ''
+            title: '',
+            toggleEdit: false,
+            messageId: 0,
+            userId: 0,  
         }
+
+        this.config={name: 'owen'}
     }
 
      handleModelChange= (value)=>{
@@ -39,6 +47,7 @@ export default class MessageBoard extends Component {
     }
 
     submit=()=>{
+
         const startDate = moment().format("MM/DD/YY, hh:mm");
         let obj={
             title: this.state.title,
@@ -56,36 +65,112 @@ export default class MessageBoard extends Component {
              }) 
     }
 
+
     handleTitleChange=(value)=>{
         this.setState({
             title: value
         })
     }
 
-    edit=()=>{
-
+    update=()=>{
+        let obj={
+            id: this.state.messageId,
+            title:this.state.title,
+            content: this.state.content,
+            userId: this.state.userId,
+            projId: this.props.match.params.id
+        }
+        axios.put('/api/updateMessage',obj)
+              .then(response=>{
+                const toast = swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                  });    
+                  toast({
+                    type: 'success',
+                    title: 'Updated successfully'
+                  })
+                  this.setState({
+                    isEditing: false,
+                    messages: response.data,
+                    title: '',
+                    content: '',
+                    toggleEdit: false
+                  })
+              })
     }
 
-    delete=()=>{
+    toggleEdit=(title,content,id,userId)=>{
+        this.setState(prevState=>({
+            isEditing: !prevState.isEditing,
+            title: title,
+            content: content,
+            toggleEdit: !prevState.toggleEdit,
+            messageId: id,
+            userId: userId
+        }))
+    }
+
+    delete=(id)=>{
+
+      let projId= this.props.match.params.id;
+
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.value) {
+
+        //axios delete call will go here
+        axios.delete(`/api/deleteMessage/${projId}/${id}`)
+                .then(response=>{
+                    this.setState({
+                        isEditing: false,
+                        messages: response.data})
+                        const toast = swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000
+                          });    
+                          toast({
+                            type: 'success',
+                            title: 'Deleted successfully'
+                          })
+                })
+            }
+          })
 
     }
 
 
     newMessage=()=>{
         this.setState(preState=>({
-            isEditing: !preState.isEditing
+            title: '',
+            isEditing: !preState.isEditing,
+            content: ''
         }))
     }
 
   render() {
-        const messages = this.state.messages.map((element,index)=>{
-               return (
-                   <Message
-                   key={index}
-                   element={element}
-                   />
-               )
-        })
+
+    const messages = this.state.messages.map((element,index)=>{
+            return (
+                <Message
+                key={index}
+                element={element}
+                toggleEdit={this.toggleEdit}
+                delete={this.delete}
+                />
+            )
+    })
     
     return (
       <div className="message-board-box">
@@ -111,7 +196,7 @@ export default class MessageBoard extends Component {
         <div className="title-input">
             <div className="message-title-label">
             <p>Title:</p>
-            <input onChange={e=>this.handleTitleChange(e.target.value)}/>
+            <input value={this.state.title} onChange={e=>this.handleTitleChange(e.target.value)}/>
             </div>
         </div>
 
@@ -120,21 +205,23 @@ export default class MessageBoard extends Component {
 
         <FroalaEditor
         model={this.state.content}
-        tag='textarea'
+        
         onModelChange={this.handleModelChange}
         />
 
-        <FroalaEditorInput
-           
-            />
-
-        FroalaEditorInput
+       
         <div className="message-sumbit-button">
-        <Button
+        {   this.state.toggleEdit?
+            <Button
+            bgColor="blue"
+            label="Save"
+            method={this.update}
+            /> : <Button
         bgColor="black"
         label="Submit"
         method={this.submit}
-        />
+        />}
+
         </div>
         </div>
       
@@ -147,10 +234,10 @@ export default class MessageBoard extends Component {
        { this.state.messages.length===0? 
         <div className="no-message">
             <div className="no-message-image">
-            <img src="https://image.flaticon.com/icons/svg/576/576827.svg" height="200px" width="200px"/>
+            <img src="https://image.flaticon.com/icons/svg/962/962356.svg" height="200px" width="200px"/>
             </div>
         <div className="no-message-content">
-         <h4> You have no message, click on the New Message button 
+         <h4> There are currently no messages on the board, click on the New Message button 
             to add a message
         </h4>
         </div>
@@ -162,3 +249,6 @@ export default class MessageBoard extends Component {
     )
   }
 }
+
+
+export default MessageBoard;
