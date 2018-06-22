@@ -15,7 +15,7 @@ class Step2 extends Component {
     };
     axios.post("/api/teamlead", details).then(res => {
       console.log(res);
-      this.props.history.push("/dashboard");
+      this.props.history.push("/dashboard/viewproject");
     });
   };
 
