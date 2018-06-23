@@ -18,7 +18,9 @@ class Header extends Component {
           </Link>
 
           <div className="header-right">
-            <Link to="/dashboard/addproject">Add Project</Link>
+
+            {this.props.ViewProfile.isLead&&<Link to="/dashboard/addproject">Add Project</Link>}
+          
             <Link to="/dashboard/viewproject">View Projects</Link>
             <Link to="/dashboard/chat"> Chat</Link>
             <Link to="/dashboard/profile">Profile</Link>
@@ -38,7 +40,8 @@ class Header extends Component {
 }
 const mapStateToProps = state => {
   return {
-    ViewProfile: state.ViewProfile
+    ViewProfile: state.ViewProfile,
+
   };
 };
 export default connect(
