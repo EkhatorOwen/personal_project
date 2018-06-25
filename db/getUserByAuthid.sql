@@ -1,1 +1,1 @@
-SELECT * FROM public.user WHERE authid = $1;
+select u.id, u.name, u.full_name,u.lead, u.email, u.job_title, z.id, z.name as org , u.img_url,z.team_name from public.user u join org_user o on u.id=o.user_id join org z on o.org_id=z.id where u.email=$1;

@@ -1,0 +1,21 @@
+.teamlead-signup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    float: left;
+}
+
+.setup_wizard{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard-2{
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}

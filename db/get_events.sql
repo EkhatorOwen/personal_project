@@ -1,0 +1,1 @@
+select start_date,end_date,title from events where proj_id=$1;

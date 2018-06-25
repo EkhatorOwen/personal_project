@@ -8,7 +8,8 @@ let initialState = {
   img: "",
   orgName: "",
   teamname: "",
-  isLead: false
+  isLead: false,
+  full_name: ''
 };
 
 const GET_USER_DETAILS = "GET_USER_DETAILS";
@@ -88,7 +89,8 @@ export default function viewProfileReducer(state = initialState, action) {
         img: data.img,
         teamname: data.teamName,
         orgName: data.orgName,
-        isLead: data.isLead
+        isLead: data.isLead,
+        full_name: data.full_name
       };
 
     case GET_NAME:

@@ -1,0 +1,1 @@
+DELETE FROM proj_user where user_id=$1 and proj_id=$2;

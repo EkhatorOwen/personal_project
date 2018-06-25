@@ -1,12 +1,16 @@
 require("dotenv").config();
 
+
 const express = require("express");
-const { json } = require("body-parser");
+const bodyParser = require("body-parser");
 const session = require("express-session");
 const passport = require("passport");
 const cors = require("cors");
 const massive = require("massive");
 const Auth0Strategy = require("passport-auth0");
+const Pusher = require('pusher');
+
+
 
 const { logout, getUser } = require("./controllers/authCtrl");
 const {
@@ -16,20 +20,38 @@ const {
   saveProject,
 
 } = require("./controllers/teamLeadCtrl");
-const { addPeople } = require('./controllers/peopleCtrl')
+const { addPeople, getPeopleProject, deletePeople } = require('./controllers/peopleCtrl')
+const { addEvent,getEvent } = require('./controllers/eventsCtrl')
+const { getMessages, addMessage, deleteMessage,updateMessage } = require('./controllers/messageCtrl')
+const { deleteProject, getProjectPictures } = require('./controllers/projectCtrl')
+const { saveJobTitle } = require('./controllers/teamMemberCtrl')
+const { assignTask,getTask,deleteTask,getUserTask,updateTask }  = require('./controllers/taskCtrl')
+
+const { getProjUsers } = require('./controllers/chatCtrl')
+
 const port = 3001;
 
 const app = express();
+// const http = require('http').Server(app)
+// const io = require('socket.io')(http)
+
 
 massive(process.env.CONNECTION_STRING)
   .then(db => app.set("db", db))
   .catch(console.log);
 
-app.use(json());
+app.use(bodyParser.json());
 app.use(cors());
-// app.use((req,res,next)=>{
-//   if(!req.session.user)
-// })
+
+const pusher = new Pusher({
+      appId: process.env.APP_ID,
+      key: process.env.KEY,
+      secret: process.env.SECRET,
+      cluster: process.env.CLUSTER,
+      encrypted: true
+    });
+
+
 
 app.use(
   session({
@@ -74,26 +96,41 @@ passport.use(
 app.get("/login", passport.authenticate("auth0"), function(req, res) {
   const { user } = req;
   const db = app.get("db");
-  db.getUserByAuthid(user.id).then(resp => {
-    if (!resp[0]) {
-      db.addUserByAuthid([
-        user.name.givenName,
-        user.displayName,
-        user.emails[0].value,
-        user.id,
-        user.picture
-      ])
-        .then(response => {
-          //console.log(response[0]);
-          req.session.user = response[0];
-          res.redirect("http://localhost:3000/#/setup/step1");
-        })
-        .catch(console.log);
-    } else {
-      req.session.user = resp[0];
-      res.redirect("http://localhost:3000/#/dashboard/viewproject");
-    }
-  });
+
+  db.getUserByEmail([user.emails[0].value])
+      .then(resp=>{
+        if(!resp[0]){
+              db.addUserByAuthid([
+                user.name.givenName,
+                user.displayName,
+                user.emails[0].value,
+                user.id,
+                user.picture
+              ])
+                .then(response => {
+                  //console.log(response[0]);
+                  req.session.user = response[0];
+                  res.redirect("http://localhost:3000/#/setup/step1");
+                })
+                .catch(console.log);
+        }
+        else if(resp[0].authid){
+             // console.log(resp[0])
+
+              req.session.user = resp[0];
+              res.redirect("http://localhost:3000/#/dashboard/viewproject");
+        }
+        else{
+                
+              db.updateUserDetails([user.name.givenName,user.displayName,user.id,user.picture,resp[0].email])
+                  .then(re=> {  
+                
+                   req.session.user = re[0]
+                    res.redirect("http://localhost:3000/#/setup/welcome"); 
+                  })
+        }
+      })
+ 
 });
 
 app.get("/api/projects", getProjects);
@@ -114,6 +151,53 @@ app.post("/api/saveProject", saveProject);
 app.post("/api/updateProfile", updateProfile);
 
 app.post('/api/addPeople', addPeople)
+
+app.get('/api/getEvents/:id', getEvent)
+
+app.post('/api/addEvent', addEvent)
+
+app.get('/api/getMessages/:id',getMessages)
+
+app.post('/api/addMessage', addMessage)
+
+app.put('/api/updateMessage',updateMessage)
+
+app.delete('/api/deleteMessage/:projid/:messageid',deleteMessage)
+
+app.delete('/api/deleteProject/:id',deleteProject)
+
+//team member stuff here
+app.post('/api/saveJobTitle',saveJobTitle)
+
+app.get('/api/project/pictures/:id',getProjectPictures)
+
+app.delete('/api/deletePeople/:user_id/:proj_id',deletePeople)
+
+
+app.get('/api/getPeopleProject/:id',getPeopleProject)
+
+//task stuff here
+app.post('/api/assignTask/:proj_id',assignTask)
+
+app.get('/api/getTasks/:proj_id',getTask)
+
+app.delete('/api/deleteTask/:task_id',deleteTask)
+
+app.get('/api/getUserTask/:proj_id',getUserTask)
+
+app.put('/api/updateTask/:task_id',updateTask)
+
+//chat stuff here
+
+app.get('/api/getProjUsers',getProjUsers)
+
+//chat stuff here
+
+  app.post('/message', (req, res) => {
+      const payload = req.body;
+      pusher.trigger('chat', 'message', payload);
+      res.send(payload)
+    });
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);

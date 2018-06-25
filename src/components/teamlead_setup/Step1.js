@@ -5,17 +5,18 @@ import {
   updateCompanyName,
   updateJobTile
 } from "../../ducks/teamLead/SignupReducer";
+import './Setup.css'
 
 class Step1 extends Component {
   render() {
     return (
-      <div>
+      <div className="teamlead-signup">
         <div>
           <h1>Step 1 of 2</h1>
         </div>
 
         <div>
-          <label>Company Name</label>
+          <p>Company Name</p>
           <input
             required
             onChange={e => this.props.updateCompanyName(e.target.value)}
@@ -24,7 +25,7 @@ class Step1 extends Component {
         </div>
 
         <div>
-          <label>Job Title</label>
+          <p>Job Title</p>
           <input
             onChange={e => this.props.updateJobTile(e.target.value)}
             placeholder="your job title"

@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getUserDetails } from "../../ducks/teamLead/ViewProfileReducer";
+
 import "./Header.css";
 
 class Header extends Component {

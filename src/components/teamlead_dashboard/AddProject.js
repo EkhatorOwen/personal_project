@@ -12,11 +12,11 @@ import moment from "moment";
 
 class AddProject extends Component {
   save = () => {
-    const stateDate = moment().format("MM/DD/YY, hh:mm");
+    const startDate = moment().format("MM/DD/YY, hh:mm");
     let details = {
       name: this.props.AddProject.projectName,
       desc: this.props.AddProject.description,
-      created_at: stateDate
+      created_at: startDate
     };
 
     //console.log(details);
@@ -28,6 +28,8 @@ class AddProject extends Component {
       showConfirmButton: false,
       timer: 3000
     });
+    this.props.updateDescription('')
+    this.props.updateProjectName('')
     toast({
       type: 'success',
       title: 'Project added successfully'
@@ -41,6 +43,7 @@ class AddProject extends Component {
         <div className="input-group">
           <p>Project Name</p>
           <input
+          value={this.props.AddProject.projectName}
             onChange={e => this.props.updateProjectName(e.target.value)}
             type="text"
           />
@@ -49,9 +52,10 @@ class AddProject extends Component {
         <div className="input-group">
           <p>Project Description</p>
           <textarea
+          value={this.props.AddProject.description}
             onChange={e => this.props.updateDescription(e.target.value)}
             rows="4"
-            cols="50"
+            cols="72"
           />
         </div>
 

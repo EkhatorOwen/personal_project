@@ -1,0 +1,55 @@
+.welcome-page{
+    width: 60%;
+    height: 695px;
+    background-image:url('https://images.unsplash.com/photo-1526029834688-277f359be090?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c3351000c439e5c44095ad3ae222b07c&auto=format&fit=crop&w=1073&q=80');
+    background-repeat:none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:30px auto;
+    
+
+}
+.welcome-greeting{
+    color: white;
+}
+/* .dashboard{
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+.login-button a:link, .login-button a:visited {
+    background-color: #f44336;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    text-decoration: none;
+}
+
+
+.login-button a:hover, .login-button a:active {
+    background-color: red;
+}
+.welcome-greeting .login-button{
+    margin-top: 50px;
+}
+
+.welcome-wrapper{
+    margin: 0 auto;
+    display: block;
+    width:40%;
+    text-align: center;
+   /* position: absolute;
+   top: 300px; */                                                                            
+  
+}
+
+.login-button .welcome-greeting{
+    width: 200px;
+    
+}
+

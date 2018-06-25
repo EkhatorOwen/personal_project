@@ -1,15 +1,17 @@
 import React from "react";
 import moment from "moment";
 import Button from './Button'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 const ProjectCard = props => {
   return (
     <div className="project-card">
       <div className="view view-name">
-        <p>Name: {props.element.name}</p>
+        <p> {props.element.name}</p>
       </div>
       <div className="view view-description">
-        <p>Description: {props.element.description}</p>
+        <p> {props.element.description}</p>
       </div>
 
       <div className="view view-description">
@@ -21,18 +23,29 @@ const ProjectCard = props => {
         </p>
       </div>
   
-      <Button 
+      {props.ViewProfile.isLead? <Link to={`/dashboard/project/${props.element.id}`}> <Button 
       label="Manage Project"
       bgColor="green"
-      />
+      method={false}
+      /></Link>:  <Link to={`/dashboard/project/${props.element.id}`}> <Button 
+      label="View Project"
+      bgColor="green"
+      method={false}
+      /></Link>  }
 
-      <Button
+      { props.ViewProfile.isLead && <Button
       bgColor="red"
       label="Delete"
-      />
+      type={null}
+      method={()=>props.deleteProject(props.element.id)}
+      />}
 
     </div>
   );
 };
 
-export default ProjectCard;
+const mapStateToProps = state =>{
+  return {ViewProfile: state.ViewProfile}
+}
+
+export default connect(mapStateToProps,null)(ProjectCard)

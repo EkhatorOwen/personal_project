@@ -1,0 +1,1 @@
+delete from project where id=$1;

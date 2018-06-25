@@ -1,0 +1,1 @@
+update public.user set job_title=$1 where id=$2;

@@ -1,0 +1,1 @@
+insert into public.user(email,lead,phone) values ($1,FALSE,$2) RETURNING id;

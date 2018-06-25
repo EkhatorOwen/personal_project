@@ -1,0 +1,1 @@
+select u.name, u.email from public.user u join proj_user p on u.id=p.user_id join project pr on p.proj_id=pr.id join task t on pr.id=t.proj_id where t.id=$1 and u.lead=true;

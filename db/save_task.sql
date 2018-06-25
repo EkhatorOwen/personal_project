@@ -1,0 +1,1 @@
+insert into task (name,description,user_id,status,assigned_date,proj_id) values ($1,$2,$3,'PENDING',$4,$5)

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { getProjects } from '../../ducks/teamLead/GetProjectsReducer'
 
 import './ViewProject.css'
+import { stat } from "fs";
  class ViewProject extends Component {
  
 
@@ -40,7 +41,7 @@ import './ViewProject.css'
 
   render() {
     let proj = this.props.GetProject.projects;
-    console.log(proj);
+   // console.log(proj);
     let result;
     if (proj.length !== 0) {
       result = proj.map((element, index) => {
@@ -48,7 +49,6 @@ import './ViewProject.css'
          key={index}
          element={element}
          deleteProject={this.deleteProject}
-
            />;
       });
     }
@@ -76,7 +76,9 @@ import './ViewProject.css'
 }
 
 const mapStateToProps = state =>{
-  return {GetProject: state.GetProject}
+  return {GetProject: state.GetProject,
+          ViewProfile: state.ViewProfile
+        }
 }
 
 export default connect(mapStateToProps,{getProjects})(ViewProject)

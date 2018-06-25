@@ -1,0 +1,1 @@
+UPDATE task set status=$1, complete_date=$2 where id=$3

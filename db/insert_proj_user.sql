@@ -1,0 +1,1 @@
+insert into proj_user (user_id, proj_id) VALUES ($1,$2);

@@ -1,0 +1,45 @@
+.task{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+    font-size: 20px;
+}
+
+.view-task{
+    width: 83%;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+.task-button{
+    align-self: center;
+}
+
+.assign-task{
+    padding: 5px;
+}
+
+.assign-task input{
+    width: 60%;
+}
+
+.react-bootstrap-table{
+    margin-top: 10%;
+}
+
+.assign-task textarea{
+    width: 60%;
+}
+
+.task-submit input{
+    cursor: pointer;
+}
+
+.react-bs-table .react-bs-table-bordered{
+    height: 100%;
+    font-size: 12px;
+    width: 100%;
+}

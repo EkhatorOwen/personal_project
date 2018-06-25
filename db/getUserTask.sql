@@ -1,0 +1,1 @@
+select t.id, t.name, t.description,t.assigned_date ,t.complete_date, t.status from task t where t.user_id=$1 and t.proj_id=$2;

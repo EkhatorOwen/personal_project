@@ -1,0 +1,8 @@
+.user-table{
+    display: flex;
+    justify-content: center;
+}
+
+.user-table .react-bs-table-container{
+    width: 80%;
+}

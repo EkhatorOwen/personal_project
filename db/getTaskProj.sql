@@ -1,0 +1,1 @@
+SELECT t.id,t.name,t.description,u.full_name,t.assigned_date,t.complete_date,t.status from task t join public.user u on t.user_id=u.id where proj_id=$1;

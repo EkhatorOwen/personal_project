@@ -1,0 +1,1 @@
+select u.id, u.name, u.email, u.img_url from public.user u join proj_user pr on u.id=pr.user_id join project p on pr.proj_id = p.id where p.id=$1 and u.img_url is not null;
