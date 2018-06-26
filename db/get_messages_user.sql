@@ -1,1 +1,1 @@
-select m.id, m.user_id ,m.title, m.body, m.created_at, u.full_name, u.img_url from message m join public.user u on m.user_id=u.id and m.proj_id=$1 order by m.created_at asc
+select m.id, m.user_id ,m.title, m.body, m.created_at, u.full_name, u.img_url from message m join public.user u on m.user_id=u.id and m.proj_id=$1 order by m.created_at desc
