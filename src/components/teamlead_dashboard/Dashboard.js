@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Switch, Route } from "react-router-dom";
-import { Alert } from "reactstrap";
+
 import Header from "./Header";
 import axios from "axios";
 import ViewProject from "./ViewProject";

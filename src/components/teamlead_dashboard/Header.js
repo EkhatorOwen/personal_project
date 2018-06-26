@@ -25,7 +25,7 @@ class Header extends Component {
             <Link to="/dashboard/viewproject">View Projects</Link>
             <Link to="/dashboard/chat"> Chat</Link>
             <Link to="/dashboard/profile">Profile</Link>
-            <a href="http://localhost:3001/logout"> Logout </a>
+            <a href={process.env.REACT_APP_LOGOUT}> Logout </a>
             <img
               width="50"
               height="50"

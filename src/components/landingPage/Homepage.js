@@ -12,7 +12,7 @@ export default function Homepage (){
               <h1>Welcome</h1>
           </div>
           <div className="login-button">
-            <a href='http://localhost:3001/login'>Login </a>
+            <a href={process.env.REACT_APP_LOGIN}>Login </a>
             </div>
             </div>
     </div>

@@ -5,7 +5,7 @@ import App from "./App";
 import { HashRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./ducks/store";
-import Alert from 'react-s-alert';
+
 import $ from 'jquery';
 import 'froala-editor/js/froala_editor.pkgd.min.js';
 import 'froala-editor/css/froala_style.min.css';

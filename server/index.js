@@ -10,6 +10,8 @@ const massive = require("massive");
 const Auth0Strategy = require("passport-auth0");
 const Pusher = require('pusher');
 
+const path = require('path')
+
 
 
 const { logout, getUser } = require(`${__dirname}/controllers/authCtrl`);
@@ -32,8 +34,7 @@ const { getProjUsers } = require(`${__dirname}/controllers/chatCtrl`)
 const port = 3001;
 
 const app = express();
-// const http = require('http').Server(app)
-// const io = require('socket.io')(http)
+
 
 
 //comment this out for local
@@ -114,6 +115,7 @@ app.get("/login", passport.authenticate("auth0"), function(req, res) {
                 .then(response => {
                   //console.log(response[0]);
                   req.session.user = response[0];
+                  //for local
                  // res.redirect("http://localhost:3000/#/setup/step1");
                   res.redirect("/#/setup/step1")
                 })
@@ -123,6 +125,7 @@ app.get("/login", passport.authenticate("auth0"), function(req, res) {
              // console.log(resp[0])
 
               req.session.user = resp[0];
+              //for local
              // res.redirect("http://localhost:3000/#/dashboard/viewproject");
              res.redirect("/#/dashboard/viewproject");
         }
