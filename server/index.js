@@ -31,7 +31,7 @@ const { assignTask,getTask,deleteTask,getUserTask,updateTask }  = require(`${__d
 
 const { getProjUsers } = require(`${__dirname}/controllers/chatCtrl`)
 
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 const app = express();
 
