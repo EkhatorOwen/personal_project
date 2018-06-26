@@ -12,28 +12,32 @@ const Pusher = require('pusher');
 
 
 
-const { logout, getUser } = require("./controllers/authCtrl");
+const { logout, getUser } = require(`${__dirname}/controllers/authCtrl`);
 const {
   saveTeamLead,
   getProjects,
   updateProfile,
   saveProject,
 
-} = require("./controllers/teamLeadCtrl");
-const { addPeople, getPeopleProject, deletePeople } = require('./controllers/peopleCtrl')
+} = require(`${__dirname}/controllers/teamLeadCtrl`);
+const { addPeople, getPeopleProject, deletePeople } = require(`${__dirname}/controllers/peopleCtrl`)
 const { addEvent,getEvent } = require('./controllers/eventsCtrl')
-const { getMessages, addMessage, deleteMessage,updateMessage } = require('./controllers/messageCtrl')
-const { deleteProject, getProjectPictures } = require('./controllers/projectCtrl')
-const { saveJobTitle } = require('./controllers/teamMemberCtrl')
-const { assignTask,getTask,deleteTask,getUserTask,updateTask }  = require('./controllers/taskCtrl')
+const { getMessages, addMessage, deleteMessage,updateMessage } = require(`${__dirname}/controllers/messageCtrl`)
+const { deleteProject, getProjectPictures } = require(`${__dirname}/controllers/projectCtrl`)
+const { saveJobTitle } = require(`${__dirname}/controllers/teamMemberCtrl`)
+const { assignTask,getTask,deleteTask,getUserTask,updateTask }  = require(`${__dirname}/controllers/taskCtrl`)
 
-const { getProjUsers } = require('./controllers/chatCtrl')
+const { getProjUsers } = require(`${__dirname}/controllers/chatCtrl`)
 
 const port = 3001;
 
 const app = express();
 // const http = require('http').Server(app)
 // const io = require('socket.io')(http)
+
+
+//comment this out for local
+app.use(express.static(`${__dirname}/../build`))
 
 
 massive(process.env.CONNECTION_STRING)
@@ -110,7 +114,8 @@ app.get("/login", passport.authenticate("auth0"), function(req, res) {
                 .then(response => {
                   //console.log(response[0]);
                   req.session.user = response[0];
-                  res.redirect("http://localhost:3000/#/setup/step1");
+                 // res.redirect("http://localhost:3000/#/setup/step1");
+                  res.redirect("/#/setup/step1")
                 })
                 .catch(console.log);
         }
@@ -118,15 +123,16 @@ app.get("/login", passport.authenticate("auth0"), function(req, res) {
              // console.log(resp[0])
 
               req.session.user = resp[0];
-              res.redirect("http://localhost:3000/#/dashboard/viewproject");
+             // res.redirect("http://localhost:3000/#/dashboard/viewproject");
+             res.redirect("/#/dashboard/viewproject");
         }
         else{
                 
               db.updateUserDetails([user.name.givenName,user.displayName,user.id,user.picture,resp[0].email])
                   .then(re=> {  
-                
                    req.session.user = re[0]
-                    res.redirect("http://localhost:3000/#/setup/welcome"); 
+                   // res.redirect("http://localhost:3000/#/setup/welcome"); 
+                   res.redirect("/#/setup/welcome"); 
                   })
         }
       })
@@ -191,6 +197,7 @@ app.put('/api/updateTask/:task_id',updateTask)
 
 app.get('/api/getProjUsers',getProjUsers)
 
+
 //chat stuff here
 
   app.post('/message', (req, res) => {
@@ -198,6 +205,12 @@ app.get('/api/getProjUsers',getProjUsers)
       pusher.trigger('chat', 'message', payload);
       res.send(payload)
     });
+
+
+    //comment this out when local
+    app.get('*',(req,res)=>{
+      res.sendFile(path.join(__dirname,'../build/index.html'))
+    })
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);

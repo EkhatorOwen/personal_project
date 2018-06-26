@@ -3,6 +3,7 @@ import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
 import axios from 'axios';
 import Button from './Button'
+import key from './key'
 
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
@@ -24,8 +25,8 @@ export default class Calendar extends Component {
     }
 
     componentDidMount(){
-        const CALENDAR_ID = 'qlti16i9bd6f770k7ddqbnqb04@group.calendar.google.com'
-        const API_KEY = 'AIzaSyCwxvF1cnObuETDts-TPLDXBxZbNwkOjmY' 
+        const CALENDAR_ID = key.CALENDAR_ID
+        const API_KEY =  key.API_KEY
         axios.get(`/api/getEvents/${this.props.match.params.id}`)
         .then(response=>{
             let arr2 = [];

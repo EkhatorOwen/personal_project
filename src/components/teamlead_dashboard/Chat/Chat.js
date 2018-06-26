@@ -7,6 +7,7 @@ import Pusher from 'pusher-js';
 
 import { getChatPeople } from '../../../ducks/chat/GetPeopleChatReducer'
 import { connect } from 'react-redux'
+import key from './../key'
 
 import './Chat.css'
         
@@ -30,7 +31,7 @@ import './Chat.css'
    this.props.getChatPeople()
 
   
-    const pusher = new Pusher('744cfd65dd1833d51515', {
+    const pusher = new Pusher(key.PUSHER_KEY, {
       cluster: 'us2',
       encrypted: true
     });
