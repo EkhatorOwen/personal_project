@@ -20,7 +20,7 @@ addPeople =( req, res)=>{
         from: `${user.email}`,
         subject: 'Collaborate!',
         text: `You have been added to ${data.projectName} by ${user.name}`,
-        html: `You have been added to ${data.projectName} by ${user.name}, <strong> click <a href="http://localhost:3000/#/">here to join</a></strong>`
+        html: `You have been added to ${data.projectName} by ${user.name}, <strong> click <a href="http://www.collaborate.press/#/">here to join</a></strong>`
     }
     sgMail.send(msg)
         console.log('notify? ',data.notifyPhone)
