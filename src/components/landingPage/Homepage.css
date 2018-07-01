@@ -148,18 +148,18 @@
 
 }
 
-
+/* 
 @media screen and (min-width: 375px) and (max-width: 812px){
     .welcome-wrapper{
         margin-top: 100%;  
     }
-}
+} */
 
-@media screen and (min-width: 411px) and (max-width: 734px){
+/* @media screen and (min-width: 411px) and (max-width: 734px){
     .welcome-wrapper{
         margin-top: 80%;  
     }
-}
+} */
 
 @media screen and (min-width: 320px) and (max-width: 568px){
     .welcome-greeting h1{
@@ -185,7 +185,7 @@
 
 } */
 
-@media screen and (min-width: 1023px) and (max-width: 1366px){
+@media screen and (min-width: 1023px) {
 
   
 
@@ -201,16 +201,5 @@
 
 }
 
-@media screen and (min-width: 1366px){
-  
-
-    .login-button a:link, .login-button a:visited {
-        padding: 20px 30px;
-    }
-
-    .welcome-greeting h1{
-        font-size: 50px;
-    }
-}
 
 
