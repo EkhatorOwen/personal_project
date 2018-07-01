@@ -148,18 +148,7 @@
 
 }
 
-/* 
-@media screen and (min-width: 375px) and (max-width: 812px){
-    .welcome-wrapper{
-        margin-top: 100%;  
-    }
-} */
 
-/* @media screen and (min-width: 411px) and (max-width: 734px){
-    .welcome-wrapper{
-        margin-top: 80%;  
-    }
-} */
 
 @media screen and (min-width: 320px) and (max-width: 568px){
     .welcome-greeting h1{
@@ -190,12 +179,13 @@
   
 
     .welcome-greeting h1{
-        font-size: 50px;
+        font-size: 60px;
     }
 
     .login-button a:link, .login-button a:visited {
       
-        padding: 15px 20px;
+        padding: 20px 30px;
+        font-size: 30px;
       
     }
 

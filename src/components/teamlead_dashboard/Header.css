@@ -40,3 +40,19 @@
   .header-right {
     float: right;
   }
+
+  @media screen and (max-width:710px ){
+
+    .header{
+      display: flex;
+      flex-direction: column;
+    }
+    .header-right{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-right img{
+      display: none;
+    }
+}
