@@ -9,6 +9,7 @@ const cors = require("cors");
 const massive = require("massive");
 const Auth0Strategy = require("passport-auth0");
 const Pusher = require('pusher');
+const sgMail = require('@sendgrid/mail')
 
 const path = require('path')
 
@@ -105,6 +106,16 @@ app.get("/login", passport.authenticate("auth0"), function(req, res) {
   db.getUserByEmail([user.emails[0].value])
       .then(resp=>{
         if(!resp[0]){
+
+
+          const msg ={
+            to: `${user.emails[0].value}`,
+            from: `collaborate.com`,
+            subject: 'Collaborate!',
+            text: `Hi ${user.name.givenName}, welcome to Collaborate! With Collaborate, you can create projects, add people to projects, assign task, chat with them and lots more.`,
+            html: `Hi ${user.name.givenName}, welcome to Collaborate! With Collaborate, you can create projects, add people to projects, assign task to them, chat with them and lots more.`
+        }
+        sgMail.send(msg)
               db.addUserByAuthid([
                 user.name.givenName,
                 user.displayName,
@@ -120,6 +131,7 @@ app.get("/login", passport.authenticate("auth0"), function(req, res) {
                   res.redirect("/#/setup/step1")
                 })
                 .catch(console.log);
+
         }
         else if(resp[0].authid){
              // console.log(resp[0])
