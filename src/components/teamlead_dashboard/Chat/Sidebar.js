@@ -6,7 +6,7 @@ const Sidebar = (props) => {
    let people = props.GetPeopleChat.chatPeople.map((response,index)=>{
        return (
            
-           <li  className="contact">
+           <li key={index}  className="contact">
             <div  className="wrap">
                 <span className="contact-status online"></span>
                 <img src={response.img_url} alt="" />
