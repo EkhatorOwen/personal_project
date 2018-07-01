@@ -11,11 +11,11 @@ class Step1 extends Component {
   render() {
     return (
       <div className="teamlead-signup">
-        <div>
+        <div className="step-1">
           <h1>Step 1 of 2</h1>
         </div>
 
-        <div>
+        <div className="company-name">
           <p>Company Name</p>
           <input
             required
@@ -24,7 +24,7 @@ class Step1 extends Component {
           />
         </div>
 
-        <div>
+        <div className="job-title">
           <p>Job Title</p>
           <input
             onChange={e => this.props.updateJobTile(e.target.value)}

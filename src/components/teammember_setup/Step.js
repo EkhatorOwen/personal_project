@@ -20,21 +20,21 @@ class Step extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="step1of1-container">
 
-        <div>
+        <div className="step1of1">
           <h1>Step 1 of 1</h1>
         </div>
 
         <div>
-          <label>Job Title</label>
+          <label>Job Title: </label>
           <input
             onChange={e => this.props.updateJobTile(e.target.value)}
             placeholder="your job title"
           />
         </div>
 
-        <div>
+        <div className="all-done">
           <button onClick={this.submit}>All done!</button>
         </div>
        

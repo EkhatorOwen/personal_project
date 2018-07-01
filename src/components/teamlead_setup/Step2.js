@@ -21,12 +21,12 @@ class Step2 extends Component {
 
   render() {
     return (
-      <div>
+      <div className="step-2">
         <h1>Step 2 of 2</h1>
         <h3>What is the name of your team?</h3>
 
         <div>
-          <label>Team Name</label>
+          <label>Team Name: </label>
           <input
             required
             onChange={e => this.props.updateTeamName(e.target.value)}
@@ -34,6 +34,7 @@ class Step2 extends Component {
           />
         </div>
 
+        <div className="step-2-buttons">
         <div>
           <Link to="/setup/step1">
             {" "}
@@ -43,6 +44,7 @@ class Step2 extends Component {
 
         <div>
           <button onClick={this.submit}>All done!</button>
+        </div>
         </div>
       </div>
     );

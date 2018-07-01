@@ -52,8 +52,10 @@
     display: block;
     width:40%;
     text-align: center;
-    position: relative;
-    margin-top: 20%;                                                                           
+    position: fixed;
+    margin-top: 20%; 
+    bottom: 44vh;
+    right: 31vw;                                                                          
   
 }
 
@@ -66,17 +68,19 @@
     .login-button a:link, .login-button a:visited{
         color: white;
     }
-
+/* 
     #myVideo{
         display: none ; 
         position: fixed;
         
-    }
-
+    } */
+/* 
     .welcome-page{
+        position: fixed;
         width: 100%;
         height: 100%;
-    }
+        background-image: url('https://images.unsplash.com/photo-1521898284481-a5ec348cb555?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6f2ed5bce03f084b61b8936517f711d7&auto=format&fit=crop&w=634&q=80')
+    } */
     
     .welcome-greeting{
         color: white;
@@ -101,7 +105,7 @@
     }  
 }
 
-@media screen and (max-width: 735px){
+@media screen and (max-width: 636px){
     .login-button a:link, .login-button a:visited{
         color: white;
     }
@@ -118,6 +122,20 @@
         font-size: 40px;
     }
 
+    .welcome-page{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-image: url('https://images.unsplash.com/photo-1521898284481-a5ec348cb555?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6f2ed5bce03f084b61b8936517f711d7&auto=format&fit=crop&w=634&q=80')
+    }
+
+    #myVideo{
+        display: none ; 
+        position: fixed;
+        
+    }
+
+
     .login-button a:link, .login-button a:visited {
         background-color: #f44336;
         color: white;
@@ -128,6 +146,71 @@
         text-decoration: none;
     }
 
-    
-    
 }
+
+
+@media screen and (min-width: 375px) and (max-width: 812px){
+    .welcome-wrapper{
+        margin-top: 100%;  
+    }
+}
+
+@media screen and (min-width: 411px) and (max-width: 734px){
+    .welcome-wrapper{
+        margin-top: 80%;  
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 568px){
+    .welcome-greeting h1{
+        font-size: 30px;
+    }
+
+    .login-button a:link, .login-button a:visited {
+        background-color: #f44336;
+        color: white;
+        padding: 4px 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        text-decoration: none;
+    }
+}
+/* 
+@media screen and (min-width: 651px) and (max-width: 819px){
+
+    .welcome-wrapper{
+        margin-top: 50%;  
+    }
+
+} */
+
+@media screen and (min-width: 1023px) and (max-width: 1366px){
+
+  
+
+    .welcome-greeting h1{
+        font-size: 50px;
+    }
+
+    .login-button a:link, .login-button a:visited {
+      
+        padding: 15px 20px;
+      
+    }
+
+}
+
+@media screen and (min-width: 1366px){
+  
+
+    .login-button a:link, .login-button a:visited {
+        padding: 20px 30px;
+    }
+
+    .welcome-greeting h1{
+        font-size: 50px;
+    }
+}
+
+
