@@ -4,15 +4,17 @@ import ProjectCard from "./ProjectCard";
 import swal from 'sweetalert2';
 import { connect } from 'react-redux';
 import { getProjects } from '../../ducks/teamLead/GetProjectsReducer'
+import { setClass } from '../../ducks/class/ClassReducer'
 
 import './ViewProject.css'
-import { stat } from "fs";
+
  class ViewProject extends Component {
  
 
   componentDidMount() {
    
     this.props.getProjects();
+     this.props.setClass();
   }
 
   deleteProject =(id)=>{
@@ -77,8 +79,9 @@ import { stat } from "fs";
 
 const mapStateToProps = state =>{
   return {GetProject: state.GetProject,
-          ViewProfile: state.ViewProfile
+          ViewProfile: state.ViewProfile,
+         
         }
 }
 
-export default connect(mapStateToProps,{getProjects})(ViewProject)
+export default connect(mapStateToProps,{getProjects,setClass})(ViewProject)

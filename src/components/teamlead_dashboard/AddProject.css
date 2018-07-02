@@ -2,6 +2,47 @@
   margin: 40px 15%;
 }
 
-.input-group textarea{
-  
+.input-group-add textarea{
+  width: 70%;
+}
+
+.input-group-add input{
+  width: 70%;
+}
+
+.input-group-add button{
+  float: right;
+}
+
+.input-group-add p{
+  margin-bottom: 0px;
+}
+
+.input-group-add{
+  margin-top: 10px;
+}
+
+@media screen and ( max-width:710px){
+ .add-project{
+    margin: 10%;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .input-group-add textarea{
+    width: 70%;
+  }
+
+  .input-group-add input{
+    width: 70%;
+  }
+
+  .input-group-add{
+    margin-top: 5px;
+  }
+
+  .input-group-add p{
+    margin-bottom: 0px;
+  }
 }

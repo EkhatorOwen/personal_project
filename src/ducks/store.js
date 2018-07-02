@@ -8,6 +8,7 @@ import GetProjectsReducer from './teamLead/GetProjectsReducer'
 import GetPeopleReducer from './teamMember/GetPeopleReducer'
 import GetTaskReducer from './task/GetTaskReducer'
 import GetPeopleChatReducer from './chat/GetPeopleChatReducer'
+import ClassReducer from './class/ClassReducer'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -20,7 +21,9 @@ const combinedReducers = combineReducers({
   GetProject: GetProjectsReducer,
   GetPeople: GetPeopleReducer,
   GetTask: GetTaskReducer,
-  GetPeopleChat: GetPeopleChatReducer
+  GetPeopleChat: GetPeopleChatReducer,
+  ClassReducer: ClassReducer,
+
 });
 
 //const middlewares = composeEnhancers(applyMiddleware(promiseMiddleware()));

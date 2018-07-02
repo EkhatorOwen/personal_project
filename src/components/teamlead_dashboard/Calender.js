@@ -8,6 +8,7 @@ import key from './key'
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
+import './Calender.css'
 
 
 BigCalendar.momentLocalizer(moment);
@@ -107,7 +108,8 @@ export default class Calendar extends Component {
   render() {
   
     return (
-      <div>
+      <div className="calender-main">
+      <div className="calender-view">
         <BigCalendar
         style={{height: '420px',
                 margin: '40px'
@@ -130,12 +132,16 @@ export default class Calendar extends Component {
         />
         </form>
         }
+
+        </div>
+        <div className="calender-button">
       <Button
       bgColor="green"
       label="Add Event"
       type={null}
       method={this.showFields}
       />
+      </div>
       </div>
     )
   }

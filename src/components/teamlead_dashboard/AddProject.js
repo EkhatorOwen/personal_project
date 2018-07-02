@@ -4,13 +4,20 @@ import {
   updateDescription,
   updateProjectName
 } from "../../ducks/teamLead/AddProjectReducer";
+
+import { setClass } from '../../ducks/class/ClassReducer'
 import axios from "axios";
 import swal from 'sweetalert2';
 
+import './AddProject.css'
 
 import moment from "moment";
 
 class AddProject extends Component {
+
+  componentDidMount(){
+    this.props.setClass()
+  }
   save = () => {
     const startDate = moment().format("MM/DD/YY, hh:mm");
     let details = {
@@ -40,7 +47,7 @@ class AddProject extends Component {
     return (
       <div className="add-project">
         <h4>Add Project</h4>
-        <div className="input-group">
+        <div className="input-group-add">
           <p>Project Name</p>
           <input
           value={this.props.AddProject.projectName}
@@ -49,17 +56,16 @@ class AddProject extends Component {
           />
         </div>
 
-        <div className="input-group">
+        <div className="input-group-add">
           <p>Project Description</p>
           <textarea
           value={this.props.AddProject.description}
             onChange={e => this.props.updateDescription(e.target.value)}
-            rows="4"
-            cols="72"
+            
           />
         </div>
 
-        <div className="input-group">
+        <div className="input-group-add">
           <button onClick={this.save} className="input-button">
             Save Project
           </button>
@@ -78,5 +84,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { updateDescription, updateProjectName }
+  { updateDescription, updateProjectName, setClass }
 )(AddProject);

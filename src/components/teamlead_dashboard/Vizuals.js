@@ -67,7 +67,7 @@ import './Visual.css'
 
       <div className="doughnut-text">
               <div className="doughnut-title">
-                <p>{arr[0].name}</p>
+                <p>{arr && arr[0].name}</p>
               </div>
                 <div className="doughnut-desc">
                 <p>Doughnut repersentation of task completed vs task pending.</p>

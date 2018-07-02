@@ -20,7 +20,7 @@ const getUser = (req, res) => {
                 isLead: response[0].lead,
                 full_name: response[0].full_name
               };
-              console.log(obj)
+              // console.log(obj)
               res.status(200).json(obj)
             })
 

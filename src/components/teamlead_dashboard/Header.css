@@ -41,18 +41,58 @@
     float: right;
   }
 
+   .icon{
+    display: none !important;
+  }
+
   @media screen and (max-width:710px ){
 
     .header{
       display: flex;
       flex-direction: column;
     }
-    .header-right{
-      display: flex;
-      flex-direction: column;
+    .header-right a{
+      display: none;
     }
 
     .header-right img{
+      float: left;
+      height: 30px;
+      width: 30px;
+    }
+
+    .logo{
       display: none;
     }
+
+    .icon{
+        display: flex !important;  
+        float: right !important;
+        cursor: pointer;
+        }
+
+      .responsive{
+        display: flex !important;
+        flex-direction: column !important;
+        float: right !important
+
+      }
+
+      .responsive img{
+        display: none;
+      
+      }
+
+      .responsive .icon{
+        
+      }
+
+      /* .responsive .icon{
+        display: flex;
+        width: 100%;
+        float: right !important;
+        /* display: none !important; */
+      /* }  */
+      
+
 }

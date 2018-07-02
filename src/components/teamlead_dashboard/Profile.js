@@ -2,10 +2,15 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { setClass } from '../../ducks/class/ClassReducer'
 import { getUserDetails } from "../../ducks/teamLead/ViewProfileReducer";
 import "./profile.css";
 
 class Profile extends Component {
+
+  componentDidMount(){
+    this.props.setClass()
+  }
   render() {
     return (
       <div className="profile-page">
@@ -66,5 +71,5 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  null
+  {setClass}
 )(Profile);

@@ -23,7 +23,20 @@
         flex-direction: column;
        
     }
-    .project-card{
-        
+  
+    .no-message img{
+        height: 100px;
+        width: 100px;
     }
+
+    .no-message-content h4{
+        font-size: 15px;
+      
+    }
+
+    .no-message-content{
+        margin: 15px;
+    }
+
+
 }

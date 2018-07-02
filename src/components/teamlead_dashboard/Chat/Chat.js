@@ -6,6 +6,7 @@ import axios from 'axios'
 import Pusher from 'pusher-js';
 
 import { getChatPeople } from '../../../ducks/chat/GetPeopleChatReducer'
+import { setClass } from '../../../ducks/class/ClassReducer'
 import { connect } from 'react-redux'
 import key from './../key'
 
@@ -29,6 +30,7 @@ import './Chat.css'
   componentDidMount(){
     
    this.props.getChatPeople()
+   this.props.setClass()
 
   
     const pusher = new Pusher(key.PUSHER_KEY, {
@@ -89,4 +91,4 @@ const mapStateToProps = state =>{
             ViewProfile: state.ViewProfile
              }
 }
-export default connect(mapStateToProps,{getChatPeople})(Chat)
+export default connect(mapStateToProps,{getChatPeople,setClass})(Chat)

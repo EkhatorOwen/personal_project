@@ -43,3 +43,26 @@
     font-size: 12px;
     width: 100%;
 }
+
+@media screen and (max-width:980px){
+    .task-button{
+        font-size: 15px;
+    }
+    .task-submit  {
+        font-size: 15px;
+    }
+
+    .task-select{
+        font-size: 15px;
+    }
+
+    .containerr{
+        font-size: 15px;
+    }
+    
+    .react-bs-table-container{
+        font-size: 15px;
+    }
+
+    
+}
