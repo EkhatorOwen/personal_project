@@ -6,7 +6,7 @@ import swal from 'sweetalert2';
 
 import Message from './Message'
 
-import FroalaEditorInput from 'react-froala-wysiwyg'
+
 
 import FroalaEditor from 'react-froala-wysiwyg';
 
