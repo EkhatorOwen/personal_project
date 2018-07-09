@@ -25,7 +25,7 @@ const saveTeamLead = (req, res) => {
                     .insert_orgid_org_user([req.session.user.id, orgid[0].id])
                     .then(response =>
                       res.redirect(
-                        "http://localhost:3000/#/dashboard/viewproject"
+                        "/#/dashboard/viewproject"
                       )
                     )
                     .catch(err => console.log(err));
