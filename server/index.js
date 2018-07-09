@@ -110,7 +110,7 @@ app.get("/login", passport.authenticate("auth0"), function(req, res) {
 
           const msg ={
             to: `${user.emails[0].value}`,
-            from: `collaborate.com`,
+            from: `owenekhator1@gmail.com`,
             subject: 'Collaborate!',
             text: `Hi ${user.name.givenName}, welcome to Collaborate! With Collaborate, you can create projects, add people to projects, assign task, chat with them and lots more.`,
             html: `Hi ${user.name.givenName}, welcome to Collaborate! With Collaborate, you can create projects, add people to projects, assign task to them, chat with them and lots more.`
