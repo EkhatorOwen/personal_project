@@ -146,8 +146,8 @@ app.get("/login", passport.authenticate("auth0"), function(req, res) {
               db.updateUserDetails([user.name.givenName,user.displayName,user.id,user.picture,resp[0].email])
                   .then(re=> {  
                    req.session.user = re[0]
-                   // res.redirect("http://localhost:3000/#/setup/welcome"); 
-                   res.redirect("/#/setup/welcome"); 
+                    res.redirect("http://localhost:3000/#/setup/welcome"); 
+                  // res.redirect("/#/setup/welcome"); 
                   })
         }
       })
@@ -174,6 +174,10 @@ app.post("/api/updateProfile", updateProfile);
 app.post('/api/addPeople', addPeople)
 
 app.get('/api/getEvents/:id', getEvent)
+
+// app.get('/api/step2',(req,res)=>{
+  
+// })
 
 app.post('/api/addEvent', addEvent)
 

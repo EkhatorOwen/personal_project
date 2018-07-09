@@ -14,8 +14,8 @@ class Step2 extends Component {
       teamName: this.props.Signup.teamName
     };
     axios.post("/api/teamlead", details).then(res => {
-      console.log(res);
-      this.props.history.push("/dashboard/viewproject");
+      //console.log(res);
+      this.props.history.push("/#/dashboard/viewproject");
     });
   };
 

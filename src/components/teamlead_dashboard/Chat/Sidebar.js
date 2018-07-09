@@ -12,7 +12,6 @@ const Sidebar = (props) => {
                 <img src={response.img_url} alt="" />
                 <div className="meta">
                     <p className="name">{response.full_name}</p>
-            
                 </div>
             </div>
         </li>

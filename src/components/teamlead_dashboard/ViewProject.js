@@ -61,10 +61,12 @@ import './ViewProject.css'
           <div className="no-message">
           <img src="https://image.flaticon.com/icons/svg/80/80565.svg" height="200px" width="200px"/>
           <div className="no-message-content">
-          <h4>
+          {this.props.ViewProfile.isLead?(<h4>
             You have no projects, click the <b>Add Project </b>
             menu to add a new project
-          </h4>
+          </h4>):(<h4>
+            You have not been added to any project.
+          </h4>)}
           </div>
           </div>
         ) : (

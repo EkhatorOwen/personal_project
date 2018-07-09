@@ -1,1 +1,1 @@
-select distinct u.id,u.full_name,u.img_url from public.user u join proj_user pr on u.id=pr.user_id where pr.proj_id in (select proj_id from proj_user where user_id =$1) 
+select distinct u.id,u.full_name,u.img_url from public.user u join proj_user pr on u.id=pr.user_id where pr.proj_id in (select proj_id from proj_user where user_id =$1) and u.img_url is not null;

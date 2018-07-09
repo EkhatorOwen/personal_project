@@ -7,6 +7,7 @@ import Pusher from 'pusher-js';
 
 import { getChatPeople } from '../../../ducks/chat/GetPeopleChatReducer'
 import { setClass } from '../../../ducks/class/ClassReducer'
+import { getChat } from '../../../ducks/chat/ChatReducer'
 import { connect } from 'react-redux'
 import key from './../key'
 
@@ -39,7 +40,8 @@ import './Chat.css'
     });
     const channel = pusher.subscribe('chat');
     channel.bind('message', data => {
-      console.log(data)
+      //console.log(data)
+      this.props.getChat(data)
       this.setState({ chats: [...this.state.chats, data] });
     });
   }
@@ -57,10 +59,24 @@ import './Chat.css'
             img_url: this.props.ViewProfile.img
           };
           axios.post('/message', payload);
-     
+
+
+          console.log(this.state.chats)
          this.setState({ input: '' })
         
         } 
+
+        handleKeyPress=(e)=>{
+          //console.log(e.key)
+         if (e.key ==='Enter') { const payload = {
+            id: this.props.ViewProfile.id,
+            message: this.state.input,
+            img_url: this.props.ViewProfile.img
+          };
+          axios.post('/message', payload);
+     
+         this.setState({ input: '' })}
+        }
 
 
   render() {
@@ -78,6 +94,7 @@ import './Chat.css'
     handleClick={this.handleClick}
     inputValue={this.state.input}
     chats={this.state.chats}
+    handleKeyPress={this.handleKeyPress}
     />
     
 	</div>
@@ -91,4 +108,4 @@ const mapStateToProps = state =>{
             ViewProfile: state.ViewProfile
              }
 }
-export default connect(mapStateToProps,{getChatPeople,setClass})(Chat)
+export default connect(mapStateToProps,{getChatPeople,setClass, getChat})(Chat)

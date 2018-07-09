@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
  const Messages= (props) => {
 	 	let chat=props.chats.map((element,index)=>{
 			 	return(
-					<li className={element.id===props.ViewProfile.id?"sent":"replies"}>
+					<li key={index} className={element.id===props.ViewProfile.id?"sent":"replies"}>
 						<img src={element.img_url} alt="" />
 						<p>{element.message}</p>
 					</li> 

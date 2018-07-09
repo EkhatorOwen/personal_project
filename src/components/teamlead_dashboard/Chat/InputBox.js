@@ -4,9 +4,9 @@ import React from 'react'
   return (
     <div className="message-input">
 				<div className="wrap">
-					<input value={props.inputValue} onChange={(e)=>props.handleChange(e.target.value)} type="text" placeholder="Write your message..." />
+					<input value={props.inputValue} onChange={(e)=>props.handleChange(e.target.value)} onKeyPress={(e)=>props.handleKeyPress(e)} type="text" placeholder="Write your message..." />
 				
-					<button onClick={()=>props.handleClick()} className="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i></button>
+					<button onClick={()=>props.handleClick()}  className="submit"><i className="fa fa-paper-plane" aria-hidden="true"></i></button>
 				</div>
 			</div>
   )
