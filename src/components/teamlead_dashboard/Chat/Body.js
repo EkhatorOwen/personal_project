@@ -18,6 +18,7 @@ export default class Body extends Component {
       handleChange={this.props.handleChange}
       handleClick={this.props.handleClick}
       inputValue={this.props.inputValue}
+      handleKeyPress={this.props.handleKeyPress}
       />
 			
     </div>
