@@ -59,14 +59,10 @@
     align-items: center;
 }
 
-.companey-name p{
+.company-name p{
     margin-bottom: 0;
 }
 
-.all-done{
-
-    
-}
 
 @media screen and (max-width: 700px){
     .setup_wizard h1{
