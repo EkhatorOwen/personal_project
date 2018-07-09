@@ -7,7 +7,7 @@ import Pusher from 'pusher-js';
 
 import { getChatPeople } from '../../../ducks/chat/GetPeopleChatReducer'
 import { setClass } from '../../../ducks/class/ClassReducer'
-import { getChat } from '../../../ducks/chat/ChatReducer'
+import { getChat } from '../../../ducks/chat/ChatReducer.js'
 import { connect } from 'react-redux'
 import key from './../key'
 
@@ -61,10 +61,14 @@ import './Chat.css'
           axios.post('/message', payload);
 
 
-          console.log(this.state.chats)
+         // console.log(this.state.chats)
          this.setState({ input: '' })
         
         } 
+
+        handleProfileClick=()=>{
+          
+        }
 
         handleKeyPress=(e)=>{
           //console.log(e.key)

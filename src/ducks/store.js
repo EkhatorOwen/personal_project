@@ -9,7 +9,7 @@ import GetPeopleReducer from './teamMember/GetPeopleReducer'
 import GetTaskReducer from './task/GetTaskReducer'
 import GetPeopleChatReducer from './chat/GetPeopleChatReducer'
 import ClassReducer from './class/ClassReducer'
-import ChatReducer from './chat/ChatReducer'
+import ChatReducer from './chat/ChatReducer.js'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
