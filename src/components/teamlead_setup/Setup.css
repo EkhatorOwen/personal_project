@@ -59,6 +59,10 @@
     align-items: center;
 }
 
+.companey-name p{
+    margin-bottom: 0;
+}
+
 .all-done{
 
     
