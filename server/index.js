@@ -39,7 +39,7 @@ const app = express();
 
 
 //comment this out for local
-//app.use(express.static(`${__dirname}/../build`))
+app.use(express.static(`${__dirname}/../build`))
 
 
 massive(process.env.CONNECTION_STRING)
@@ -138,16 +138,16 @@ app.get("/login", passport.authenticate("auth0"), function(req, res) {
 
               req.session.user = resp[0];
               //for local
-              res.redirect("http://localhost:3000/#/dashboard/viewproject");
-            // res.redirect("/#/dashboard/viewproject");
+            //  res.redirect("http://localhost:3000/#/dashboard/viewproject");
+             res.redirect("/#/dashboard/viewproject");
         }
         else{
                 
               db.updateUserDetails([user.name.givenName,user.displayName,user.id,user.picture,resp[0].email])
                   .then(re=> {  
                    req.session.user = re[0]
-                    res.redirect("http://localhost:3000/#/setup/welcome"); 
-                  // res.redirect("/#/setup/welcome"); 
+                 //   res.redirect("http://localhost:3000/#/setup/welcome"); 
+                   res.redirect("/#/setup/welcome"); 
                   })
         }
       })
@@ -227,9 +227,9 @@ app.get('/api/getProjUsers',getProjUsers)
 
 
     //comment this out when local
-    // app.get('*',(req,res)=>{
-    //   res.sendFile(path.join(__dirname,'../build/index.html'))
-    // })
+    app.get('*',(req,res)=>{
+      res.sendFile(path.join(__dirname,'../build/index.html'))
+    })
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
