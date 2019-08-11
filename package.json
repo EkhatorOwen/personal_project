@@ -34,7 +34,7 @@
     "react-bootstrap-table2-editor": "^0.2.1",
     "react-bootstrap-table2-filter": "^0.2.0",
     "react-chartjs-2": "^2.7.2",
-    "react-dom": "^16.4.0",
+    "react-dom": "^16.4.2",
     "react-event-calendar": "^0.3.0",
     "react-firebase-file-uploader": "^2.4.1",
     "react-froala-wysiwyg": "^2.8.1",
