@@ -7,7 +7,7 @@
     "@fortawesome/react-fontawesome": "0.0.20",
     "@pusher/chatkit": "^0.7.16",
     "@sendgrid/mail": "^6.3.1",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.7.2",
